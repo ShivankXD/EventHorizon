@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Horizon — Space Science Journalism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,500;1,9..144,700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   DESIGN TOKENS
+════════════════════════════════════════ */
+:root {
+  --paper:    #f6f3ee;
+  --paper2:   #ede9e0;
+  --paper3:   #e4dfd3;
+  --ink:      #18160f;
+  --ink2:     #2d2a22;
+  --ink3:     #48453b;
+  --dim:      #6e6a5e;
+  --dim2:     #9a9588;
+  --rule:     #ccc8bb;
+  --rule2:    #b8b3a3;
+  --red:      #b52b18;
+  --red2:     #d43520;
+  --navy:     #1a3256;
+  --gold:     #9c7a28;
+
+  --f-head:   'Fraunces', Georgia, serif;
+  --f-body:   'Lora', Georgia, serif;
+  --f-mono:   'Fira Code', monospace;
+
+  --w:        1240px;
+  --px:       clamp(1.1rem, 5vw, 4rem);
+}
+
+/* ════════════════════════════════════════
+   RESET
+════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ════════════════════════════════════════
+   PAPER TEXTURE
+════════════════════════════════════════ */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  pointer-events:none;z-index:9999;
+  opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+
+/* ════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════ */
+.wrap{max-width:var(--w);margin:0 auto;padding:0 var(--px)}
+.mono{font-family:var(--f-mono)}
+.tag{
+  display:inline-block;
+  font-family:var(--f-mono);
+  font-size:.52rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:.22rem .6rem;
+  border:1px solid currentColor;
+}
+.tag-red{color:var(--red);border-color:rgba(181,43,24,.3);background:rgba(181,43,24,.06)}
+.tag-navy{color:var(--navy);border-color:rgba(26,50,86,.25);background:rgba(26,50,86,.05)}
+.tag-gold{color:var(--gold);border-color:rgba(156,122,40,.25);background:rgba(156,122,40,.06)}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes tickerMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ════════════════════════════════════════
+   TOP BAR
+════════════════════════════════════════ */
+.topbar{
+  background:var(--ink);
+  color:rgba(246,243,238,.4);
+  font-family:var(--f-mono);
+  font-size:.56rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:.48rem var(--px);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.topbar-links{display:flex;gap:1.5rem}
+.topbar-links a{color:rgba(246,243,238,.4);transition:color .15s}
+.topbar-links a:hover{color:rgba(246,243,238,.75)}
+
+/* ════════════════════════════════════════
+   MASTHEAD
+════════════════════════════════════════ */
+.masthead{
+  padding:2.6rem var(--px) 0;
+  border-bottom:1px solid var(--rule);
+}
+.mast-inner{max-width:var(--w);margin:0 auto}
+.mast-row{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:end;
+  gap:1.5rem;
+  margin-bottom:1.2rem;
+}
+@media(max-width:640px){
+  .mast-row{grid-template-columns:1fr;text-align:center}
+  .mast-left,.mast-right{display:none}
+}
+.mast-left,.mast-right{
+  font-family:var(--f-mono);
+  font-size:.54rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim2);
+  line-height:2.1;
+}
+.mast-right{text-align:right}
+.mast-center{text-align:center}
+.wordmark{
+  font-family:var(--f-head);
+  font-weight:900;
+  font-size:clamp(2.6rem,7.5vw,6.2rem);
+  line-height:.92;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  text-transform:uppercase;
+}
+.wordmark em{font-style:italic;font-weight:300;color:var(--dim)}
+.mast-rule-row{
+  display:flex;align-items:center;gap:.8rem;
+  margin-top:.8rem;
+}
+.mast-rule-row::before,.mast-rule-row::after{content:'';flex:1;height:1px;background:var(--rule2)}
+.mast-tagline{
+  font-family:var(--f-mono);
+  font-size:.48rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--dim2);
+  white-space:nowrap;
+}
+
+/* ════════════════════════════════════════
+   STICKY NAV
+════════════════════════════════════════ */
+.sitenav{
+  position:sticky;top:0;z-index:200;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 8px rgba(24,22,15,.06);
+}
+.sitenav-inner{
+  max-width:var(--w);margin:0 auto;
+  padding:0 var(--px);
+  display:flex;align-items:stretch;height:42px;
+}
+.nav-logo{
+  font-family:var(--f-head);
+  font-weight:900;
+  font-size:1rem;
+  display:flex;align-items:center;
+  padding-right:1.4rem;
+  border-right:1px solid var(--rule);
+  white-space:nowrap;
+  letter-spacing:.02em;
+}
+.nav-items{
+  display:flex;align-items:stretch;flex:1;
+  overflow-x:auto;scrollbar-width:none;
+}
+.nav-items::-webkit-scrollbar{display:none}
+.nav-item{
+  display:flex;align-items:center;
+  padding:0 1rem;
+  font-family:var(--f-mono);
+  font-size:.58rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--dim);
+  border-right:1px solid var(--rule);
+  white-space:nowrap;
+  cursor:pointer;
+  transition:color .15s,background .15s;
+}
+.nav-item:hover{color:var(--ink);background:var(--paper2)}
+.nav-item.on{color:var(--red);border-bottom:2px solid var(--red)}
+.nav-gap{flex:1}
+.nav-sub{
+  display:flex;align-items:center;
+  padding:0 1.2rem;
+  font-family:var(--f-mono);
+  font-size:.56rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:white;
+  background:var(--ink);
+  cursor:pointer;
+  transition:background .15s;
+  white-space:nowrap;
+}
+.nav-sub:hover{background:var(--red)}
+
+/* ════════════════════════════════════════
+   HERO — newspaper layout
+════════════════════════════════════════ */
+.hero{
+  padding:2.8rem 0 0;
+  max-width:var(--w);margin:0 auto;
+  padding-left:var(--px);padding-right:var(--px);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 1px 340px;
+  gap:0;
+  border-bottom:1px solid var(--rule);
+  padding-bottom:2.8rem;
+}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-vr{display:none}
+  .hero-side{border-top:1px solid var(--rule);padding:2rem 0 0;margin-top:2rem;padding-left:0}
+}
+
+/* HERO MAIN */
+.hero-main{padding-right:2.8rem}
+
+.hero-feat-img{
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  position:relative;
+  margin-bottom:1.5rem;
+}
+.hero-feat-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+.hero-feat-img:hover img{transform:scale(1.02)}
+.img-badge{
+  position:absolute;top:.9rem;left:.9rem;
+  background:var(--red);
+  color:white;
+  font-family:var(--f-mono);
+  font-size:.5rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  padding:.24rem .6rem;
+}
+.img-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.55));
+  padding:2rem .9rem .6rem;
+  font-family:var(--f-mono);
+  font-size:.48rem;
+  letter-spacing:.1em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+}
+
+.hero-kicker{
+  font-family:var(--f-mono);
+  font-size:.56rem;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.8rem;
+  display:flex;align-items:center;gap:.7rem;
+}
+.hero-kicker::before{content:'';width:1.6rem;height:1px;background:var(--red)}
+
+.hero-h1{
+  font-family:var(--f-head);
+  font-weight:700;
+  font-size:clamp(1.75rem,3.2vw,2.7rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  margin-bottom:.95rem;
+}
+.hero-deck{
+  font-family:var(--f-body);
+  font-size:1.05rem;
+  font-style:italic;
+  font-weight:400;
+  color:var(--dim);
+  line-height:1.65;
+  margin-bottom:1.1rem;
+  padding-left:1rem;
+  border-left:2px solid var(--rule2);
+}
+.hero-byline{
+  display:flex;align-items:center;gap:.75rem;
+  font-family:var(--f-mono);
+  font-size:.55rem;
+  letter-spacing:.08em;
+  color:var(--dim2);
+  margin-bottom:1.5rem;
+}
+.hero-byline-sep{color:var(--rule2)}
+
+.hero-cols{
+  columns:2;
+  column-gap:2rem;
+  column-rule:1px solid var(--rule);
+  font-size:.97rem;
+  line-height:1.82;
+  color:var(--ink3);
+}
+@media(max-width:580px){.hero-cols{columns:1;column-rule:none}}
+.hero-cols p{break-inside:avoid}
+.hero-cols p+p{margin-top:.85em}
+
+.hero-more{
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:1.3rem;
+  font-family:var(--f-mono);
+  font-size:.56rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  border-bottom:1px solid var(--red);
+  padding-bottom:1px;
+  cursor:pointer;transition:opacity .15s;
+}
+.hero-more:hover{opacity:.65}
+
+/* HERO SIDEBAR */
+.hero-vr{background:var(--rule)}
+.hero-side{padding-left:2.4rem}
+.side-lbl{
+  font-family:var(--f-mono);
+  font-size:.5rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--dim2);
+  padding-bottom:.65rem;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:0;
+}
+.side-item{
+  padding:1rem 0;
+  border-bottom:1px solid var(--rule);
+  cursor:pointer;
+  display:grid;
+  grid-template-columns:1fr 70px;
+  gap:.8rem;
+  align-items:start;
+  transition:opacity .15s;
+}
+.side-item:last-child{border-bottom:none}
+.side-item:hover{opacity:.65}
+.side-thumb{
+  width:70px;height:52px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.side-thumb img{width:100%;height:100%;object-fit:cover}
+.si-tag{
+  font-family:var(--f-mono);
+  font-size:.48rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--navy);
+  margin-bottom:.28rem;
+}
+.si-ttl{
+  font-family:var(--f-head);
+  font-weight:500;font-size:.97rem;
+  line-height:1.22;color:var(--ink);
+  margin-bottom:.22rem;
+}
+.si-meta{
+  font-family:var(--f-mono);
+  font-size:.48rem;color:var(--dim2);letter-spacing:.06em;
+}
+
+/* ════════════════════════════════════════
+   TICKER
+════════════════════════════════════════ */
+.ticker{
+  background:var(--ink);
+  display:flex;align-items:stretch;
+  overflow:hidden;height:34px;
+}
+.ticker-lbl{
+  background:var(--red);
+  padding:0 1rem;
+  font-family:var(--f-mono);
+  font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
+  display:flex;align-items:center;
+  color:white;flex-shrink:0;white-space:nowrap;
+}
+.ticker-track{flex:1;overflow:hidden;display:flex;align-items:center}
+.ticker-content{
+  display:flex;gap:3rem;
+  animation:tickerMove 35s linear infinite;
+  white-space:nowrap;
+}
+.tick-item{
+  font-family:var(--f-mono);
+  font-size:.55rem;letter-spacing:.1em;
+  color:rgba(246,243,238,.45);
+  display:flex;align-items:center;gap:.6rem;
+}
+.tick-item::before{content:'●';font-size:.38rem;color:var(--red)}
+
+/* ════════════════════════════════════════
+   SECTION HEADER
+════════════════════════════════════════ */
+.sec-hd{
+  display:flex;align-items:center;gap:1rem;
+  padding:2.6rem 0 1.3rem;
+}
+.sec-hd-title{
+  font-family:var(--f-mono);
+  font-size:.56rem;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--dim);white-space:nowrap;
+}
+.sec-hd-line{flex:1;height:1px;background:var(--rule)}
+.sec-hd-ct{
+  font-family:var(--f-mono);
+  font-size:.48rem;color:var(--dim2);opacity:.5;white-space:nowrap;
+}
+
+/* ════════════════════════════════════════
+   ARTICLE GRID
+════════════════════════════════════════ */
+.agrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:2px solid var(--ink);
+  border-left:1px solid var(--rule);
+  margin-bottom:0;
+}
+@media(max-width:840px){.agrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.agrid{grid-template-columns:1fr}}
+
+.acard{
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;
+  cursor:pointer;position:relative;
+  background:var(--paper);
+  transition:background .2s;
+  animation:fadeUp .45s ease both;
+}
+.acard:nth-child(1){animation-delay:.04s}
+.acard:nth-child(2){animation-delay:.09s}
+.acard:nth-child(3){animation-delay:.14s}
+.acard:nth-child(4){animation-delay:.19s}
+.acard:nth-child(5){animation-delay:.24s}
+.acard:nth-child(6){animation-delay:.29s}
+.acard:hover{background:var(--paper2)}
+.acard::after{
+  content:'';
+  position:absolute;top:-2px;left:0;right:0;
+  height:2px;background:var(--red);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .28s ease;
+}
+.acard:hover::after{transform:scaleX(1)}
+
+.acard-img{
+  width:100%;aspect-ratio:16/9;
+  overflow:hidden;position:relative;
+  flex-shrink:0;
+}
+.acard-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;
+}
+.acard:hover .acard-img img{transform:scale(1.05)}
+
+.acard-body{padding:1.3rem 1.3rem 1.1rem;display:flex;flex-direction:column;flex:1}
+.acard-num{
+  font-family:var(--f-mono);font-size:.46rem;
+  letter-spacing:.18em;color:var(--dim2);opacity:.38;
+  margin-bottom:.45rem;
+}
+.acard-tag{margin-bottom:.5rem}
+.acard-title{
+  font-family:var(--f-head);
+  font-weight:600;font-size:1.08rem;
+  line-height:1.24;color:var(--ink);
+  margin-bottom:.55rem;flex:1;
+}
+.acard-exc{
+  font-family:var(--f-body);
+  font-size:.84rem;font-style:italic;
+  color:var(--dim);line-height:1.52;
+  margin-bottom:.95rem;
+}
+.acard-foot{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  padding-top:.85rem;
+  border-top:1px solid var(--rule);
+  margin-top:auto;
+}
+.acard-date{
+  font-family:var(--f-mono);font-size:.49rem;
+  color:var(--dim2);letter-spacing:.06em;
+}
+.acard-arr{
+  font-size:.7rem;color:var(--dim2);
+  transition:color .15s,transform .15s;
+}
+.acard:hover .acard-arr{color:var(--red);transform:translateX(3px)}
+
+/* ════════════════════════════════════════
+   FULL-WIDTH IMAGE BREAK
+════════════════════════════════════════ */
+.img-break{
+  width:100%;
+  height:420px;
+  overflow:hidden;
+  position:relative;
+  margin:0;
+}
+@media(max-width:600px){.img-break{height:240px}}
+.img-break img{width:100%;height:100%;object-fit:cover}
+.img-break-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(18,16,9,.72) 0%,rgba(18,16,9,.1) 60%,transparent 100%);
+  display:flex;align-items:center;
+}
+.img-break-text{
+  color:white;
+  padding:0 var(--px);
+  max-width:560px;
+}
+.img-break-label{
+  font-family:var(--f-mono);
+  font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:.6rem;
+}
+.img-break-quote{
+  font-family:var(--f-head);
+  font-weight:400;font-style:italic;
+  font-size:clamp(1.4rem,3vw,2.1rem);
+  line-height:1.35;
+  color:rgba(255,255,255,.9);
+  margin-bottom:.7rem;
+}
+.img-break-attr{
+  font-family:var(--f-mono);
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.38);
+}
+
+/* ════════════════════════════════════════
+   NEWSLETTER
+════════════════════════════════════════ */
+.nl{
+  background:var(--paper2);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:3rem var(--px);
+}
+.nl-inner{
+  max-width:var(--w);margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3rem;align-items:center;
+}
+@media(max-width:660px){.nl-inner{grid-template-columns:1fr}}
+.nl-eye{
+  font-family:var(--f-mono);
+  font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--red);margin-bottom:.5rem;
+}
+.nl-title{
+  font-family:var(--f-head);
+  font-weight:700;
+  font-size:clamp(1.4rem,2.5vw,1.95rem);
+  line-height:1.15;color:var(--ink);
+  margin-bottom:.65rem;
+}
+.nl-desc{
+  font-family:var(--f-body);
+  font-size:.93rem;font-style:italic;
+  color:var(--dim);line-height:1.62;
+}
+.nl-form{display:flex;flex-direction:column;gap:.55rem}
+.nl-input{
+  border:1px solid var(--rule2);background:var(--paper);
+  padding:.75rem 1rem;
+  font-family:var(--f-mono);font-size:.64rem;
+  letter-spacing:.04em;color:var(--ink);
+  outline:none;transition:border-color .15s;
+}
+.nl-input:focus{border-color:var(--ink)}
+.nl-input::placeholder{color:var(--dim2)}
+.nl-btn{
+  background:var(--ink);border:none;color:white;
+  padding:.75rem 1.4rem;
+  font-family:var(--f-mono);font-size:.6rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  cursor:pointer;align-self:flex-start;
+  transition:background .15s;
+}
+.nl-btn:hover{background:var(--red)}
+.nl-note{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.05em;color:var(--dim2)}
+
+/* ════════════════════════════════════════
+   AI GENERATOR
+════════════════════════════════════════ */
+.gen{
+  background:var(--ink2);
+  padding:4rem var(--px);
+}
+.gen-inner{max-width:var(--w);margin:0 auto}
+.gen-hd{
+  padding-bottom:2rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  margin-bottom:2.5rem;
+}
+.gen-eye{
+  font-family:var(--f-mono);font-size:.5rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--red2);margin-bottom:.4rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.gen-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--red2);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+.gen-title{
+  font-family:var(--f-head);font-weight:700;
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  color:rgba(246,243,238,.88);line-height:1.1;
+}
+.gen-sub{
+  font-family:var(--f-mono);font-size:.52rem;
+  color:rgba(246,243,238,.22);letter-spacing:.1em;
+  margin-top:.3rem;
+}
+.gen-body{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:3rem;align-items:start;
+}
+@media(max-width:700px){.gen-body{grid-template-columns:1fr}}
+.gen-topics-lbl{
+  font-family:var(--f-mono);font-size:.48rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(246,243,238,.22);
+  margin-bottom:.7rem;
+  padding-bottom:.5rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.gen-topic{
+  display:flex;align-items:center;gap:.65rem;
+  padding:.52rem .65rem;cursor:pointer;
+  border:1px solid transparent;
+  transition:all .14s;margin-bottom:2px;
+}
+.gen-topic:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.07)}
+.gen-topic.on{background:rgba(181,43,24,.1);border-color:rgba(181,43,24,.32)}
+.gen-ti{font-size:.82rem;flex-shrink:0}
+.gen-tt{
+  font-family:var(--f-mono);font-size:.58rem;
+  letter-spacing:.05em;
+  color:rgba(246,243,238,.38);line-height:1.3;
+}
+.gen-topic:hover .gen-tt,.gen-topic.on .gen-tt{color:rgba(246,243,238,.82)}
+
+.gen-flbl{
+  font-family:var(--f-mono);font-size:.48rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(246,243,238,.22);margin-bottom:.55rem;
+}
+.gen-irow{
+  display:flex;
+  border:1px solid rgba(255,255,255,.1);
+  margin-bottom:0;
+}
+.gen-inp{
+  flex:1;background:rgba(255,255,255,.04);
+  border:none;outline:none;
+  padding:.82rem 1rem;
+  font-family:var(--f-mono);font-size:.66rem;letter-spacing:.04em;
+  color:rgba(246,243,238,.82);
+  transition:background .15s;
+}
+.gen-inp:focus{background:rgba(255,255,255,.07)}
+.gen-inp::placeholder{color:rgba(246,243,238,.18)}
+.gen-btn{
+  background:var(--red);border:none;color:white;
+  padding:.82rem 1.35rem;
+  font-family:var(--f-mono);font-size:.58rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  cursor:pointer;transition:background .15s;white-space:nowrap;
+  flex-shrink:0;
+}
+.gen-btn:hover{background:var(--red2)}
+.gen-btn:disabled{background:rgba(181,43,24,.28);cursor:not-allowed}
+.gen-loader{
+  display:none;align-items:center;gap:.7rem;
+  padding:.9rem 0;
+  font-family:var(--f-mono);font-size:.55rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(246,243,238,.28);
+}
+.gen-loader.on{display:flex}
+.gen-spin{
+  width:13px;height:13px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.1);
+  border-top-color:var(--red2);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+.gen-out{
+  display:none;
+  border:1px solid rgba(255,255,255,.07);
+  margin-top:1.2rem;
+  background:rgba(255,255,255,.025);
+}
+.gen-out.on{display:block}
+.gen-out-hd{
+  padding:1.35rem 1.55rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.gen-out-cat{
+  font-family:var(--f-mono);font-size:.48rem;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--red2);margin-bottom:.45rem;
+}
+.gen-out-title{
+  font-family:var(--f-head);font-weight:700;
+  font-size:1.42rem;line-height:1.15;
+  color:rgba(246,243,238,.88);margin-bottom:.35rem;
+}
+.gen-out-meta{
+  font-family:var(--f-mono);font-size:.48rem;
+  letter-spacing:.07em;color:rgba(246,243,238,.22);
+}
+.gen-out-body{
+  padding:1.35rem 1.55rem;
+  font-family:var(--f-body);font-size:.9rem;
+  line-height:1.78;color:rgba(246,243,238,.58);
+}
+.gen-out-body p+p{margin-top:.82em}
+.gen-out-body em{color:rgba(246,243,238,.78);font-style:italic}
+.gen-acts{
+  display:none;gap:.4rem;
+  padding:0 1.55rem 1.35rem;flex-wrap:wrap;
+}
+.gen-acts.on{display:flex}
+.gen-act{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(246,243,238,.38);
+  padding:.38rem .82rem;
+  font-family:var(--f-mono);font-size:.5rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;transition:all .14s;
+}
+.gen-act:hover{border-color:rgba(255,255,255,.25);color:rgba(246,243,238,.78)}
+.gen-act.p{
+  background:rgba(181,43,24,.12);
+  border-color:rgba(181,43,24,.38);
+  color:rgba(212,53,32,.82);
+}
+.gen-act.p:hover{background:rgba(181,43,24,.22);color:#e04030}
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+.footer{
+  background:var(--ink);
+  padding:3.5rem var(--px) 2rem;
+}
+.footer-inner{max-width:var(--w);margin:0 auto}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:2.5rem;
+  padding-bottom:2.5rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  margin-bottom:2rem;
+}
+@media(max-width:760px){.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.footer-top{grid-template-columns:1fr}}
+.footer-wm{
+  font-family:var(--f-head);font-weight:900;
+  font-size:1.9rem;letter-spacing:.03em;text-transform:uppercase;
+  color:rgba(246,243,238,.1);margin-bottom:.7rem;
+}
+.footer-desc{
+  font-family:var(--f-mono);font-size:.52rem;
+  letter-spacing:.07em;
+  color:rgba(246,243,238,.22);line-height:1.85;
+}
+.fcol-title{
+  font-family:var(--f-mono);font-size:.5rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(246,243,238,.28);
+  margin-bottom:.85rem;
+  padding-bottom:.45rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.fcol-links{display:flex;flex-direction:column;gap:.45rem}
+.fcol-links a{
+  font-family:var(--f-mono);font-size:.56rem;
+  letter-spacing:.07em;
+  color:rgba(246,243,238,.28);transition:color .14s;
+}
+.fcol-links a:hover{color:rgba(246,243,238,.65)}
+.footer-bot{
+  display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-copy{
+  font-family:var(--f-mono);font-size:.48rem;
+  letter-spacing:.1em;color:rgba(246,243,238,.18);
+}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{
+  font-family:var(--f-mono);font-size:.48rem;
+  letter-spacing:.1em;color:rgba(246,243,238,.18);transition:color .14s;
+}
+.footer-legal a:hover{color:rgba(246,243,238,.5)}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>Thursday, June 4, 2026 &nbsp;·&nbsp; Vol. I Issue 024</span>
+  <div class="topbar-links">
+    <a href="#">Archive</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#gen">AI Writer</a>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="mast-inner">
+    <div class="mast-row">
+      <div class="mast-left">Science journalism<br>from the edge of<br>the observable universe</div>
+      <div class="mast-center">
+        <div class="wordmark">Event<br><em>&amp;</em> Horizon</div>
+        <div class="mast-rule-row">
+          <span class="mast-tagline">Independent · Rigorous · Free to Read</span>
+        </div>
+      </div>
+      <div class="mast-right">Est. 2026<br>Issue No. 024<br>Daily Publishing</div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <div class="nav-logo">E&amp;H</div>
+    <div class="nav-items">
+      <div class="nav-item on">Front Page</div>
+      <div class="nav-item">Exo Worlds</div>
+      <div class="nav-item">Black Holes</div>
+      <div class="nav-item">Missions</div>
+      <div class="nav-item">Cosmology</div>
+      <div class="nav-item">Technology</div>
+      <div class="nav-item">Archive</div>
+    </div>
+    <div class="nav-gap"></div>
+    <div class="nav-sub">Subscribe Free</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<main>
+<div class="hero">
+  <div class="hero-grid">
+
+    <!-- LEAD -->
+    <div class="hero-main">
+      <div class="hero-feat-img">
+        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1200&q=80" alt="Earth from space" loading="eager">
+        <div class="img-badge">Feature</div>
+        <div class="img-cap">Hubble Space Telescope · HD 189733b System · ESA/NASA</div>
+      </div>
+      <div class="hero-kicker">Exo Worlds · Lead Story</div>
+      <h1 class="hero-h1">A Deep-Blue World 63 Light-Years Away Looks Like Earth — But Rains Glass at 5,400&nbsp;mph</h1>
+      <p class="hero-deck">HD 189733b glows a familiar cobalt from afar. Up close it is one of the most hostile environments ever catalogued: 2,000°F heat, silicate precipitation, and hypersonic winds that never stop screaming.</p>
+      <div class="hero-byline">
+        <span>Space Daily Editorial Team</span>
+        <span class="hero-byline-sep">·</span>
+        <span>June 1, 2026</span>
+        <span class="hero-byline-sep">·</span>
+        <span>8 min read</span>
+      </div>
+      <div class="hero-cols">
+        <p>Point the right spectrograph at HD 189733b and the light that returns is a deep cobalt blue — the same blue you know from Earth's oceans seen from orbit. The resemblance is purely cosmetic, and one of the universe's crueller jokes.</p>
+        <p>The blue is not water. It is silicate — window glass — condensed from the atmosphere under extreme pressure and swept sideways at 5,400 miles per hour by wind systems that circle the planet without pause. Tidally locked, one hemisphere bakes in permanent noon, the other freezes in eternal night.</p>
+        <p>Astronomers first confirmed the colour through polarimetry in 2013 at La Silla Observatory. The finding was immediately arresting: here was a planet that looked, through a telescope, like it belonged in our own solar system, orbiting a star visible to the naked eye from Earth.</p>
+        <p>JWST follow-up observations have since built a portrait of a world at the extreme edge of planetary physics — its atmosphere a soup of sodium, potassium, and vaporised iron, with carbon monoxide detected at wind speeds never recorded anywhere else in the known universe.</p>
+      </div>
+      <a class="hero-more" href="#">Continue Reading →</a>
+    </div>
+
+    <div class="hero-vr"></div>
+
+    <!-- SIDEBAR -->
+    <div class="hero-side">
+      <div class="side-lbl">Also In This Issue</div>
+      <div class="side-item">
+        <div>
+          <div class="si-tag">Black Holes</div>
+          <div class="si-ttl">M87's Shadow Grows Sharper in New EHT Data</div>
+          <div class="si-meta">Jun 3, 2026 · 6 min read</div>
+        </div>
+        <div class="side-thumb">
+          <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=200&q=70" alt="Black hole">
+        </div>
+      </div>
+      <div class="side-item">
+        <div>
+          <div class="si-tag">Missions</div>
+          <div class="si-ttl">Perseverance Drills Into a Potential Biosignature Layer</div>
+          <div class="si-meta">Jun 2, 2026 · 5 min read</div>
+        </div>
+        <div class="side-thumb">
+          <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=200&q=70" alt="Mars">
+        </div>
+      </div>
+      <div class="side-item">
+        <div>
+          <div class="si-tag">Cosmology</div>
+          <div class="si-ttl">Hubble Tension Deepens — Physics May Need Rewriting</div>
+          <div class="si-meta">Jun 1, 2026 · 9 min read</div>
+        </div>
+        <div class="side-thumb">
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200&q=70" alt="Galaxy">
+        </div>
+      </div>
+      <div class="side-item">
+        <div>
+          <div class="si-tag">Technology</div>
+          <div class="si-ttl">ESA Greenlights Lunar Far-Side Interferometry Array</div>
+          <div class="si-meta">May 30, 2026 · 4 min read</div>
+        </div>
+        <div class="side-thumb">
+          <img src="https://images.unsplash.com/photo-1446776858070-70c3d5ed6758?w=200&q=70" alt="Moon">
+        </div>
+      </div>
+      <div class="side-item">
+        <div>
+          <div class="si-tag">Supernovae</div>
+          <div class="si-ttl">A Star 25× Our Sun's Mass Went Quietly Dark</div>
+          <div class="si-meta">May 29, 2026 · 5 min read</div>
+        </div>
+        <div class="side-thumb">
+          <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=200&q=70" alt="Nebula">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-lbl">Latest</div>
+  <div class="ticker-track">
+    <div class="ticker-content" id="tickerContent"></div>
+  </div>
+</div>
+
+<!-- ARTICLE GRID -->
+<div class="wrap">
+  <div class="sec-hd">
+    <span class="sec-hd-title">Latest Dispatches</span>
+    <div class="sec-hd-line"></div>
+    <span class="sec-hd-ct">024 Articles</span>
+  </div>
+  <div class="agrid" id="agrid"></div>
+</div>
+
+<!-- FULL-WIDTH IMAGE BREAK -->
+<div class="img-break">
+  <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1600&q=80" alt="Milky Way night sky">
+  <div class="img-break-overlay">
+    <div class="img-break-text">
+      <div class="img-break-label">Editor's Note</div>
+      <p class="img-break-quote">"The universe is not obliged to make sense to you. It is only obliged to be extraordinarily, relentlessly, bewilderingly strange."</p>
+      <div class="img-break-attr">— Neil deGrasse Tyson, Astrophysicist</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="nl">
+  <div class="nl-inner">
+    <div>
+      <div class="nl-eye">Newsletter</div>
+      <h2 class="nl-title">The Weekly Dispatch — Free in Your Inbox</h2>
+      <p class="nl-desc">Every Sunday: the week's most important space science findings, explained clearly and without jargon. Trusted by 40,000 curious readers around the world.</p>
+    </div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com">
+      <button class="nl-btn">Subscribe — It's Free</button>
+      <span class="nl-note">No spam. Unsubscribe anytime. We never share your address.</span>
+    </div>
+  </div>
+</div>
+
+<!-- AI GENERATOR -->
+<section class="gen" id="gen">
+  <div class="gen-inner">
+    <div class="gen-hd">
+      <div class="gen-eye"><div class="gen-dot"></div>AI-Powered</div>
+      <div class="gen-title">Article Generator</div>
+      <div class="gen-sub">Powered by Claude · Publish-ready drafts in seconds</div>
+    </div>
+    <div class="gen-body">
+      <div>
+        <div class="gen-topics-lbl">Quick Topics</div>
+        <div id="topicsList"></div>
+      </div>
+      <div>
+        <div class="gen-flbl">Custom Topic</div>
+        <div class="gen-irow">
+          <input class="gen-inp" id="topicInput" placeholder="e.g. Fast radio burst origins">
+          <button class="gen-btn" id="genBtn" onclick="gen()">Generate</button>
+        </div>
+        <div class="gen-loader" id="genLoader"><div class="gen-spin"></div>Composing — stand by</div>
+        <div class="gen-out" id="genOut">
+          <div class="gen-out-hd">
+            <div class="gen-out-cat" id="outCat"></div>
+            <div class="gen-out-title" id="outTitle"></div>
+            <div class="gen-out-meta" id="outMeta"></div>
+          </div>
+          <div class="gen-out-body" id="outBody"></div>
+          <div class="gen-acts" id="genActs">
+            <button class="gen-act" onclick="copyArt()">Copy Markdown</button>
+            <button class="gen-act" onclick="saveArt()">Download JSON</button>
+            <button class="gen-act p" onclick="addFeed()">Add to Feed →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-wm">Event<br>Horizon</div>
+        <div class="footer-desc">Independent space science journalism. Rigorous, accessible, free to read — powered by AI-assisted daily publishing.</div>
+      </div>
+      <div>
+        <div class="fcol-title">Sections</div>
+        <div class="fcol-links">
+          <a href="#">Exo Worlds</a>
+          <a href="#">Black Holes</a>
+          <a href="#">Missions</a>
+          <a href="#">Cosmology</a>
+          <a href="#">Technology</a>
+          <a href="#">Supernovae</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcol-title">Company</div>
+        <div class="fcol-links">
+          <a href="#">About</a>
+          <a href="#">Editorial Process</a>
+          <a href="#">Advertise</a>
+          <a href="#">Press Kit</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcol-title">Follow</div>
+        <div class="fcol-links">
+          <a href="#">Twitter / X</a>
+          <a href="#">Bluesky</a>
+          <a href="#">RSS Feed</a>
+          <a href="#">Newsletter</a>
+          <a href="#">Podcast</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 Event Horizon. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── ARTICLE DATA ── */
+const ARTICLES = [
+  {
+    n:'001', tag:'Black Holes', tagType:'tag-navy',
+    img:'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&q=75',
+    alt:'Black hole visualization',
+    title:"The Shadow at M87's Core Grows Sharper in New EHT Release",
+    exc:'Refined imaging reveals unexpected magnetic field structures around the first black hole ever photographed.',
+    date:'Jun 03, 2026', read:'6 min'
+  },
+  {
+    n:'002', tag:'Missions', tagType:'tag-red',
+    img:'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&q=75',
+    alt:'Mars surface',
+    title:'Perseverance Drills Into a Potential Biosignature Layer on Mars',
+    exc:'Scientists cautiously optimistic as samples show organic chemistry consistent with ancient microbial mats.',
+    date:'Jun 02, 2026', read:'5 min'
+  },
+  {
+    n:'003', tag:'Cosmology', tagType:'tag-gold',
+    img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=75',
+    alt:'Milky Way galaxy',
+    title:'Hubble Tension Deepens — Standard Physics May Need Rewriting',
+    exc:'Two independent measurements of cosmic expansion refuse to agree, pointing toward undiscovered physics.',
+    date:'Jun 01, 2026', read:'9 min'
+  },
+  {
+    n:'004', tag:'Exo Worlds', tagType:'tag-navy',
+    img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=75',
+    alt:'Exoplanet orbit',
+    title:'TRAPPIST-1e Shows Atmospheric Water Vapor Signature',
+    exc:'JWST spectrometry data reveals possible steam — the most compelling habitability clue yet for this system.',
+    date:'May 31, 2026', read:'7 min'
+  },
+  {
+    n:'005', tag:'Supernovae', tagType:'tag-red',
+    img:'https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=600&q=75',
+    alt:'Nebula in space',
+    title:"A Star 25× Our Sun's Mass Went Quietly Dark Without a Bang",
+    exc:'N6946-BH1 appears to have collapsed directly into a black hole — a rare failed supernova caught in progress.',
+    date:'May 30, 2026', read:'5 min'
+  },
+  {
+    n:'006', tag:'Technology', tagType:'tag-gold',
+    img:'https://images.unsplash.com/photo-1446776858070-70c3d5ed6758?w=600&q=75',
+    alt:'Moon surface',
+    title:'ESA Greenlights a 100 km Radio Telescope on the Lunar Far Side',
+    exc:'The proposed array could observe the cosmic dark ages — a period completely invisible from Earth — for the first time.',
+    date:'May 29, 2026', read:'4 min'
+  },
+];
+
+const grid = document.getElementById('agrid');
+ARTICLES.forEach(a => {
+  const c = document.createElement('div');
+  c.className = 'acard';
+  c.innerHTML = `
+    <div class="acard-img"><img src="${a.img}" alt="${a.alt}" loading="lazy"></div>
+    <div class="acard-body">
+      <div class="acard-num">#${a.n}</div>
+      <div class="acard-tag"><span class="tag ${a.tagType}">${a.tag}</span></div>
+      <div class="acard-title">${a.title}</div>
+      <div class="acard-exc">${a.exc}</div>
+      <div class="acard-foot">
+        <span class="acard-date">${a.date} · ${a.read} read</span>
+        <span class="acard-arr">→</span>
+      </div>
+    </div>`;
+  grid.appendChild(c);
+});
+
+/* ── TICKER ── */
+const ticks = [
+  "Voyager 1 signal received after 22-hour gap — engineers investigating",
+  "James Webb discovers galaxy cluster at redshift z=12.5",
+  "SpaceX Starship completes 8th integrated flight test",
+  "Solar maximum confirmed — strongest cycle in 20 years",
+  "China's Chang'e-7 launches toward lunar south pole",
+  "New exoplanet found in habitable zone of Barnard's Star",
+];
+const tc = document.getElementById('tickerContent');
+[...ticks,...ticks].forEach(t => {
+  const d = document.createElement('div');
+  d.className = 'tick-item';
+  d.textContent = t;
+  tc.appendChild(d);
+});
+
+/* ── TOPICS ── */
+const TOPICS = [
+  ['🪐','Exoplanet atmospheres & habitability'],
+  ['⚫','Supermassive black holes'],
+  ['🌌','Dark matter & dark energy'],
+  ['💫','Neutron stars & gravitational waves'],
+  ['🔭','JWST deep-field findings'],
+  ['🚀','Mars sample return mission'],
+  ['☄️','Asteroid mining & resources'],
+  ['🌠','Fast radio bursts mystery'],
+];
+let selTopic = '';
+const tl = document.getElementById('topicsList');
+TOPICS.forEach(([icon, text]) => {
+  const el = document.createElement('div');
+  el.className = 'gen-topic';
+  el.innerHTML = `<span class="gen-ti">${icon}</span><span class="gen-tt">${text}</span>`;
+  el.onclick = () => {
+    document.querySelectorAll('.gen-topic').forEach(t => t.classList.remove('on'));
+    el.classList.add('on');
+    selTopic = text;
+    document.getElementById('topicInput').value = text;
+  };
+  tl.appendChild(el);
+});
+
+/* ── GENERATE ── */
+let lastArt = null;
+async function gen() {
+  const topic = document.getElementById('topicInput').value.trim() || selTopic || 'a recent space discovery';
+  const btn    = document.getElementById('genBtn');
+  const loader = document.getElementById('genLoader');
+  const out    = document.getElementById('genOut');
+  const acts   = document.getElementById('genActs');
+  btn.disabled = true;
+  loader.classList.add('on');
+  out.classList.remove('on');
+  acts.classList.remove('on');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{
+          role:'user',
+          content:`You are a senior science journalist for "Event Horizon", a prestigious space science publication with the editorial depth of Scientific American. Write a compelling, factually accurate article about: "${topic}".
+
+Return ONLY valid JSON — no markdown, no preamble:
+{
+  "title": "Precise headline (12 words max)",
+  "category": "One of: Exo Worlds | Black Holes | Missions | Cosmology | Technology | Supernovae",
+  "readTime": "N min read",
+  "intro": "One arresting opening sentence that establishes the stakes immediately.",
+  "p1": "3-4 sentences. The core scientific finding explained clearly for curious non-experts.",
+  "p2": "3-4 sentences. Historical context and why this discovery matters for science.",
+  "p3": "3-4 sentences. What researchers are doing next and what questions remain open.",
+  "closing": "One resonant final sentence that conveys cosmic scale or wonder."
+}`
+        }]
+      })
+    });
+    const data = await res.json();
+    const art = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
+    lastArt = art;
+    document.getElementById('outCat').textContent   = art.category;
+    document.getElementById('outTitle').textContent  = art.title;
+    document.getElementById('outMeta').textContent   = `${art.readTime} · Generated ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`;
+    document.getElementById('outBody').innerHTML =
+      `<p><em>${art.intro}</em></p><p>${art.p1}</p><p>${art.p2}</p><p>${art.p3}</p><p><em>${art.closing}</em></p>`;
+    out.classList.add('on');
+    acts.classList.add('on');
+  } catch(e) {
+    document.getElementById('outCat').textContent   = 'Error';
+    document.getElementById('outTitle').textContent  = 'Generation failed';
+    document.getElementById('outMeta').textContent   = '';
+    document.getElementById('outBody').innerHTML     = `<p>${e.message}</p>`;
+    out.classList.add('on');
+  }
+  loader.classList.remove('on');
+  btn.disabled = false;
+}
+
+function copyArt() {
+  if (!lastArt) return;
+  const md = `# ${lastArt.title}\n\n*${lastArt.category} · ${lastArt.readTime}*\n\n${lastArt.intro}\n\n${lastArt.p1}\n\n${lastArt.p2}\n\n${lastArt.p3}\n\n${lastArt.closing}`;
+  navigator.clipboard.writeText(md);
+  alert('Copied as Markdown.');
+}
+function saveArt() {
+  if (!lastArt) return;
+  const b = new Blob([JSON.stringify({...lastArt,date:new Date().toISOString()},null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = `article-${Date.now()}.json`;
+  a.click();
+}
+function addFeed() {
+  alert('In production: commits article JSON to your GitHub repo → triggers Netlify rebuild → live in ~30 seconds.');
+}
+
+document.getElementById('topicInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') gen();
+});
+</script>
+</body>
+</html>
