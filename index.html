@@ -512,7 +512,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <span>Thursday, June 4, 2026 &nbsp;·&nbsp; Vol. I Issue 024</span>
+  <span id="liveDateIST"></span> &nbsp;·&nbsp; Vol. I Issue 024</span>
   <div class="topbar-links">
     <div class="visitor-pill"><div class="visitor-dot"></div><span id="visitorCount">—</span> reading now</div>
     <a href="#">Archive</a>
@@ -1140,6 +1140,20 @@ function closeArticle() {
   if (page) page.classList.remove('open');
   document.body.style.overflow = '';
 }
+
+/* ══ LIVE IST DATE ══ */
+(function(){
+  function updateIST(){
+    var el = document.getElementById('liveDateIST');
+    if (!el) return;
+    var ist = new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Kolkata'}));
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    el.textContent = days[ist.getDay()] + ', ' + months[ist.getMonth()] + ' ' + ist.getDate() + ', ' + ist.getFullYear();
+  }
+  updateIST();
+  setInterval(updateIST, 60000);
+})();
 
 // Wire artPage scroll progress after full page load
 window.addEventListener('load', function() {
