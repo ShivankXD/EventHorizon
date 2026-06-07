@@ -98,7 +98,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
 /* search in nav */
 .nav-search-wrap{display:flex;align-items:center;border-left:1px solid var(--rule);position:relative}
-.nav-search-btn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);font-size:.9rem;transition:color .15s}
+.nav-search-btn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);transition:color .15s}
 .nav-search-btn:hover{color:var(--ink)}
 .nav-search-inp{width:0;overflow:hidden;border:none;background:transparent;outline:none;font-family:var(--f-mono);font-size:.62rem;color:var(--ink);transition:width .25s ease,padding .25s ease;padding:0}
 .nav-search-inp::placeholder{color:var(--dim2)}
@@ -122,7 +122,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .nav-dark-btn{
   width:42px;height:42px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;border-left:1px solid var(--rule);
-  font-size:.85rem;transition:color .15s;color:var(--dim);
+  transition:color .15s;color:var(--dim);
 }
 .nav-dark-btn:hover{color:var(--ink)}
 
@@ -130,7 +130,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .nav-bm-btn{
   width:42px;height:42px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;border-left:1px solid var(--rule);
-  font-size:.85rem;color:var(--dim);transition:color .15s;position:relative;
+  color:var(--dim);transition:color .15s;position:relative;
 }
 .nav-bm-btn:hover{color:var(--ink)}
 .bm-count{
@@ -235,7 +235,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   background:rgba(0,0,0,.5);color:white;
   border:none;width:32px;height:32px;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:.85rem;
+  cursor:pointer;
   transition:background .15s;
   backdrop-filter:blur(4px);
 }
@@ -304,7 +304,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   background:rgba(0,0,0,.45);color:white;
   border:none;width:28px;height:28px;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:.75rem;
+  cursor:pointer;
   transition:background .15s;
   backdrop-filter:blur(4px);
 }
@@ -434,6 +434,37 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .gen-act.p{background:rgba(181,43,24,.12);border-color:rgba(181,43,24,.38);color:rgba(212,53,32,.82)}
 .gen-act.p:hover{background:rgba(181,43,24,.22);color:#e04030}
 
+/* ══ ARTICLE READER PAGE ══ */
+.art-page{display:none;position:fixed;inset:0;z-index:600;background:var(--paper);overflow-y:auto;transition:background .3s}
+.art-page.open{display:block}
+.art-topbar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 var(--px);height:48px;transition:background .3s}
+.art-back{display:flex;align-items:center;gap:.55rem;font-family:var(--f-mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);cursor:pointer;transition:color .15s;border:none;background:none}
+.art-back:hover{color:var(--red)}
+.art-back svg{stroke:currentColor}
+.art-progress{height:2px;background:var(--red);width:0%;transition:width .1s linear;position:absolute;bottom:0;left:0}
+.art-wrap{max-width:760px;margin:0 auto;padding:3.5rem var(--px) 5rem}
+.art-kicker{font-family:var(--f-mono);font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
+.art-kicker::before{content:'';width:1.4rem;height:1px;background:var(--red)}
+.art-h1{font-family:var(--f-head);font-weight:700;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.08;letter-spacing:-.015em;color:var(--ink);margin-bottom:1rem}
+.art-deck{font-family:var(--f-body);font-size:1.08rem;font-style:italic;color:var(--dim);line-height:1.65;border-left:2px solid var(--rule2);padding-left:1rem;margin-bottom:1.4rem}
+.art-byline{display:flex;align-items:center;gap:.75rem;font-family:var(--f-mono);font-size:.54rem;letter-spacing:.08em;color:var(--dim2);padding-bottom:1.4rem;border-bottom:1px solid var(--rule);margin-bottom:2rem;flex-wrap:wrap}
+.art-byline-sep{color:var(--rule2)}
+.art-hero-img{width:calc(100% + 2*var(--px));margin-left:calc(-1*var(--px));height:420px;overflow:hidden;margin-bottom:2.5rem;position:relative}
+.art-hero-img img{width:100%;height:100%;object-fit:cover}
+.art-hero-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.5));padding:2rem 1rem .6rem;font-family:var(--f-mono);font-size:.46rem;letter-spacing:.1em;color:rgba(255,255,255,.5);text-transform:uppercase}
+.art-body{font-family:var(--f-body);font-size:1.05rem;line-height:1.88;color:var(--ink3)}
+.art-body p{margin-bottom:1.45em}
+.art-body h2{font-family:var(--f-head);font-weight:700;font-size:1.5rem;color:var(--ink);margin:2.5em 0 .75em;line-height:1.15;letter-spacing:-.01em}
+.art-body blockquote{border-left:3px solid var(--red);padding:.5rem 0 .5rem 1.4rem;margin:2em 0;font-family:var(--f-head);font-size:1.22rem;font-style:italic;color:var(--ink2);line-height:1.45}
+.art-body .drop-cap::first-letter{font-family:var(--f-head);font-size:5.2em;font-weight:900;float:left;line-height:.78;margin:.06em .12em 0 0;color:var(--ink)}
+.art-body .fact-box{background:var(--paper2);border:1px solid var(--rule);border-left:3px solid var(--navy);padding:1.2rem 1.4rem;margin:2em 0;font-size:.9rem}
+.art-body .fact-box strong{font-family:var(--f-mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);display:block;margin-bottom:.5rem}
+.art-foot{margin-top:3rem;padding-top:1.5rem;border-top:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.art-foot-tag{font-family:var(--f-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim2)}
+.art-share{display:flex;gap:.5rem}
+.art-share-btn{font-family:var(--f-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--rule2);background:none;color:var(--dim);padding:.3rem .75rem;cursor:pointer;transition:all .14s}
+.art-share-btn:hover{border-color:var(--ink);color:var(--ink)}
+
 /* ══ FOOTER ══ */
 .footer{background:var(--ink);padding:3.5rem var(--px) 2rem}
 .footer-inner{max-width:var(--w);margin:0 auto}
@@ -521,13 +552,13 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     <!-- search -->
     <div class="nav-search-wrap" id="searchWrap">
       <input class="nav-search-inp" id="searchInp" type="text" placeholder="Search articles…">
-      <div class="nav-search-btn" id="searchBtn" onclick="toggleSearch()">🔍</div>
+      <div class="nav-search-btn" id="searchBtn" onclick="toggleSearch()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg></div>
       <div class="search-results" id="searchResults"></div>
     </div>
     <!-- dark mode -->
-    <div class="nav-dark-btn" id="darkBtn" onclick="toggleDark()" title="Toggle dark mode">🌙</div>
+    <div class="nav-dark-btn" id="darkBtn" onclick="toggleDark()" title="Toggle dark mode"><svg id="darkIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
     <!-- bookmarks -->
-    <div class="nav-bm-btn" onclick="openBmDrawer()" title="Saved articles">🔖<span class="bm-count" id="bmCount">0</span></div>
+    <div class="nav-bm-btn" onclick="openBmDrawer()" title="Saved articles"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span class="bm-count" id="bmCount">0</span></div>
     <div class="nav-sub" onclick="document.querySelector('.nl-input').focus();document.querySelector('.nl').scrollIntoView({behavior:'smooth'})">Subscribe Free</div>
   </div>
 </nav>
@@ -552,7 +583,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
       <div class="hero-feat-img">
         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1200&q=80" alt="Earth from space" loading="eager">
         <div class="img-badge">Feature</div>
-        <button class="img-bm-btn" id="heroBmBtn" onclick="toggleHeroBookmark()" title="Save article">🔖</button>
+        <button class="img-bm-btn" id="heroBmBtn" onclick="toggleHeroBookmark()" title="Save article"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
         <div class="img-cap">Hubble Space Telescope · HD 189733b System · ESA/NASA</div>
       </div>
       <div class="hero-kicker">Exo Worlds · Lead Story</div>
@@ -761,17 +792,19 @@ function dismissNotif() {
 }
 
 /* ══ DARK MODE ══ */
+const SUN_SVG = `<svg id="darkIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const MOON_SVG = `<svg id="darkIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
 function toggleDark() {
   const body = document.body;
   const btn = document.getElementById('darkBtn');
   body.classList.toggle('dark');
   const isDark = body.classList.contains('dark');
-  btn.textContent = isDark ? '☀️' : '🌙';
+  btn.innerHTML = isDark ? SUN_SVG : MOON_SVG;
   localStorage.setItem('eh_dark', isDark ? '1' : '0');
 }
 if (localStorage.getItem('eh_dark') === '1') {
   document.body.classList.add('dark');
-  document.getElementById('darkBtn').textContent = '☀️';
+  document.getElementById('darkBtn').innerHTML = SUN_SVG;
 }
 
 /* ══ SEARCH ══ */
@@ -884,7 +917,7 @@ ARTICLES.forEach(a => {
   c.innerHTML = `
     <div class="acard-img">
       <img src="${a.img}" alt="${a.alt}" loading="lazy">
-      <button class="card-bm ${isSaved?'saved':''}" onclick="event.stopPropagation();toggleBookmark('${a.id}',this)" title="Bookmark">🔖</button>
+      <button class="card-bm ${isSaved?'saved':''}" onclick="event.stopPropagation();toggleBookmark('${a.id}',this)" title="Bookmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
     </div>
     <div class="acard-body">
       <div class="acard-num">#${a.n}</div>
@@ -897,6 +930,7 @@ ARTICLES.forEach(a => {
         <span class="acard-arr">→</span>
       </div>
     </div>`;
+  c.addEventListener('click', (function(id){ return function(e){ if(e.target.closest('.card-bm')) return; openArticle(id); }; })(a.id));
   grid.appendChild(c);
 });
 
@@ -985,6 +1019,177 @@ function copyArt(){if(!lastArt)return;const md=`# ${lastArt.title}\n\n*${lastArt
 function saveArt(){if(!lastArt)return;const b=new Blob([JSON.stringify({...lastArt,date:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`article-${Date.now()}.json`;a.click()}
 function addFeed(){alert('In production: commits article JSON to your GitHub repo → triggers Netlify rebuild → live in ~30 seconds.')}
 document.getElementById('topicInput').addEventListener('keydown',e=>{if(e.key==='Enter')genArticle()});
+
+/* ══ ARTICLE READER ══ */
+const ARTICLE_CONTENT = {
+  'a001': {
+    kicker: 'Black Holes · EHT Release',
+    deck: 'Refined imaging reveals unexpected magnetic field structures around the first black hole ever photographed — and raises new questions about jet formation.',
+    imgCap: 'Event Horizon Telescope composite image of M87* · EHT Collaboration / ESO',
+    body: `<p class="drop-cap">The image that changed everything was released on April 10, 2019: a blurry orange ring, a shadow at its centre, 6.5 billion solar masses captured for the first time in a single frame. Now, five years on, the Event Horizon Telescope collaboration has published a refined analysis of M87* that offers something rarer than the original photograph — clarity.</p>
+<p>The new data, drawn from 2018 observations processed with next-generation imaging algorithms, resolves the photon ring of M87* with roughly twice the effective resolution of the original release. What it reveals is surprising: the magnetic field architecture at the base of the relativistic jet extending from M87*'s poles is far more ordered than general relativistic models predicted. Specifically, the field lines appear to thread through the event horizon itself in a coherent helical structure that persists across multiple observational epochs.</p>
+<h2>Why the Jet Matters</h2>
+<p>M87's jet — a plasma stream blasting 5,000 light-years into intergalactic space at near-luminal velocity — is one of the most energetic phenomena in the observable universe. How it forms has been a central mystery since Heber Curtis first spotted it in 1918. The leading mechanism, the Blandford-Znajek process, predicts that a spinning black hole can extract rotational energy through magnetic field lines threading the event horizon, launching the jet. The new EHT data is the strongest observational support yet for this model.</p>
+<blockquote>"We're not just imaging a shadow anymore. We're beginning to read the magnetic field lines like a map of the engine room." — Dr. Sera Markoff, EHT Science Council</blockquote>
+<p>The refined images also show the photon ring — light that has orbited the black hole one or more times before escaping — is not perfectly circular. There is a subtle asymmetry in brightness consistent with the black hole rotating clockwise as seen from Earth, a measurement that constitutes the most precise determination of M87*'s spin yet achieved.</p>
+<h2>What Comes Next</h2>
+<p>The EHT collaboration is currently processing 2021 and 2022 observation runs, which added new stations including those in Greenland and France, significantly increasing baseline and resolution. The collaboration is also pursuing a Space VLBI component — a radio antenna in Earth orbit that would extend the effective baseline to thousands of kilometres, potentially resolving structure within the shadow itself.</p>
+<div class="fact-box"><strong>Key Numbers</strong>M87* mass: 6.5 billion solar masses · Distance: 53.5 million light-years · Jet length: ~5,000 light-years · Shadow diameter: ~42 microarcseconds · Schwarzschild radius: ~190 AU</div>
+<p>For the broader field of high-energy astrophysics, the implication is significant: if the Blandford-Znajek mechanism is confirmed as the jet-launching mechanism, then supermassive black hole spin — not just mass — becomes a primary driver of galactic feedback, the process by which black holes regulate star formation across their host galaxies. Every elliptical galaxy in the sky, shaped over billions of years by jets like M87's, might owe its form to physics happening within a few Schwarzschild radii of a spinning singularity.</p>`
+  },
+  'a002': {
+    kicker: 'Missions · Mars 2026',
+    deck: 'Perseverance has drilled into a layer of sedimentary rock in Jezero Crater that shows chemical signatures scientists associate with ancient biological activity on Earth.',
+    imgCap: 'Perseverance rover at the Jezero delta front scarp · NASA/JPL-Caltech/MSSS',
+    body: `<p class="drop-cap">The rock is unremarkable to look at. A flat, grey-brown slab of fine-grained mudstone, half-buried in the Jezero Crater delta, it looks like something you might step over on a hiking trail. But Perseverance's SHERLOC instrument — a deep-UV Raman and fluorescence spectrometer — spent three hours interrogating it last month, and the data it returned has the Mars science community in a state of careful, cautious excitement.</p>
+<p>The spectra show the presence of aromatic organic compounds, sulphate minerals, and — most intriguingly — a spatial correlation between organic matter and mineral structures that, on Earth, is a reliable indicator of microbial mat biosignatures in ancient lake sediments. It is not proof of life. It is not close to proof of life. But it is exactly the kind of chemical relationship that drove the science team to select this specific location for drilling.</p>
+<h2>The Biosignature Question</h2>
+<p>The term "biosignature" is doing heavy lifting here. A biosignature, strictly defined, is any substance or phenomenon that provides evidence of past or present life. The problem is that many potential biosignatures — complex organics, sulphate reduction patterns, certain mineral morphologies — can be produced abiotically. Mars has organic chemistry. That has been established since Curiosity's discovery of thiophenic compounds in 2018. What Perseverance's latest sample potentially represents is a step further: not just organics, but organics in a spatial relationship with minerals that is preferentially explained by biology.</p>
+<blockquote>"The chemistry is telling us something organised was concentrating carbon in this rock. Whether that organisation was life, we cannot say from orbit or even from rover data. That question needs a laboratory on Earth." — Dr. Tara Djokic, Sample Science Team</blockquote>
+<p>The rock has been cored, sealed into a titanium sample tube, and cached on the surface near the delta front. It joins 22 other sealed tubes — a library of Martian geology assembled over three years of painstaking driving, drilling, and instrument deployment. The full collection represents the most geologically diverse and scientifically targeted sample set ever assembled beyond Earth.</p>
+<h2>Getting the Samples Home</h2>
+<p>The Mars Sample Return campaign — a joint NASA-ESA effort to retrieve Perseverance's tubes and return them to terrestrial laboratories — has faced significant turbulence. Cost estimates ballooned past $10 billion for the original architecture, triggering a programme review that resulted in a simplified mission design now under evaluation. NASA aims to have samples on Earth no earlier than the mid-2030s. If that timeline holds, the tube drilled this month might answer the question of Martian life within the next decade.</p>
+<div class="fact-box"><strong>Sample Stats</strong>Tubes sealed: 23 of 38 capacity · Drilling depth: up to 6cm · Sample volume: ~6cm³ per tube · Cache sites: 2 (Three Forks + delta front) · Target return: ~2035</div>
+<p>In the meantime, SHERLOC data continues to accumulate. The instrument has now characterised the organic chemistry of 47 separate rock targets across the crater floor and delta. The pattern is consistent: the delta rocks — sediments deposited by an ancient river as it slowed and dropped its load — carry the richest and most complex organic signatures. Whatever happened in Jezero 3.5 billion years ago, it happened here, at the water's edge.</p>`
+  },
+  'a003': {
+    kicker: 'Cosmology · Fundamental Physics',
+    deck: 'The Hubble tension — the stubborn disagreement between two independent measurements of how fast the universe is expanding — has now reached a significance level that makes statistical chance almost impossible.',
+    imgCap: 'HST image of Cepheid variable stars in the Large Magellanic Cloud · NASA/ESA/HST Key Project Team',
+    body: `<p class="drop-cap">The universe is expanding. That much has been known since 1929. The rate at which it expands — the Hubble constant, H₀ — has been measured continuously for nearly a century. And for the past decade, two independently conducted, methodologically distinct measurement campaigns have returned numbers that stubbornly, persistently, maddeningly refuse to agree with each other. The discrepancy is now at 5.7 sigma. In physics, 5 sigma is the threshold for a discovery. At 5.7 sigma, the probability that this disagreement is a statistical accident is roughly 1 in 14 million.</p>
+<p>The "early universe" camp — led by the Planck satellite's measurement of the cosmic microwave background — gives H₀ = 67.4 kilometres per second per megaparsec. The "late universe" camp — anchored by the SH0ES collaboration's Cepheid variable distance ladder — gives H₀ = 73.0. These are not rounding errors. They represent a universe that is either expanding 8% faster than the CMB predicts, or one whose CMB we are misinterpreting.</p>
+<h2>What Standard Cosmology Says</h2>
+<p>The standard model of cosmology — ΛCDM, Lambda-Cold Dark Matter — is extraordinarily successful. It correctly predicts the large-scale structure of the universe, the abundance of light elements, the pattern of fluctuations in the cosmic microwave background, and the accelerating expansion driven by dark energy. What it cannot do, apparently, is give a single consistent value for H₀. Either one of the measurement chains has a systematic error no one has yet identified, or the standard model is incomplete.</p>
+<blockquote>"Both measurements are now so internally consistent and externally corroborated that attributing the tension to experimental error requires more special pleading than accepting that something new is going on in the physics." — Dr. Adam Riess, SH0ES Collaboration</blockquote>
+<p>The theoretical proposals to resolve the tension are numerous and creative. Early dark energy — a brief burst of additional expansion in the universe's first 100,000 years — could shift the CMB prediction upward. Interacting dark matter models can alter the growth of structure. Some proposals invoke additional relativistic species — effectively, new types of particles — in the early universe. None has yet achieved consensus, because none makes predictions that cleanly distinguish it from the alternatives.</p>
+<h2>New Data, Same Problem</h2>
+<p>The James Webb Space Telescope has now provided an independent check on the Cepheid distance ladder — the same rungs, observed in the infrared where dust absorption is far less problematic than in the visible. The result: the Cepheid measurements hold up. JWST data confirms the SH0ES value to within 1%. The systematic error that CMB adherents hoped would be found in the Cepheid chain has not materialised.</p>
+<div class="fact-box"><strong>The Numbers</strong>CMB value (Planck): 67.4 ± 0.5 km/s/Mpc · Distance ladder (SH0ES): 73.0 ± 1.0 km/s/Mpc · Discrepancy: 5.5 km/s/Mpc · Statistical significance: 5.7σ · Probability of chance: ~1 in 14,000,000</div>
+<p>This leaves cosmologists in an unusual and uncomfortable position. The two pillars of observational cosmology — early-universe probes and late-universe distance measurements — are telling different stories about the same constant. If neither has a systematic error, the universe itself is the problem. The expansion history may not be described by any version of ΛCDM that preserves its current structure. Some new physics, operating at some scale not yet probed, is altering the expansion rate. Identifying it is now arguably the most important open problem in fundamental physics.</p>`
+  },
+  'a004': {
+    kicker: 'Exo Worlds · JWST',
+    deck: 'Spectroscopic data from the James Webb Space Telescope shows a statistically significant water vapour signal in the atmosphere of TRAPPIST-1e, a rocky world in the habitable zone of a nearby red dwarf.',
+    imgCap: 'Artist\'s impression of TRAPPIST-1e surface · ESO/M. Kornmesser',
+    body: `<p class="drop-cap">The TRAPPIST-1 system has been a source of fevered scientific interest since 2017, when astronomers announced the discovery of seven Earth-sized planets orbiting a red dwarf star just 39 light-years away. Three of those worlds — d, e, and f — orbit within the star's habitable zone. TRAPPIST-1e, in particular, has drawn attention as the most Earth-analogous of the three: it receives roughly the same stellar flux as Earth, its density measurements are consistent with a rocky composition, and it is small enough that water, if present, might survive as a surface liquid.</p>
+<p>Now, James Webb has done what no previous telescope could: analysed light transmitted through TRAPPIST-1e's atmosphere during transit, and found something. The transmission spectrum shows absorption features at 1.4 and 1.9 micrometres — wavelengths characteristic of water vapour. The signal sits at 3.5 sigma, short of the formal 5-sigma discovery threshold, but significant enough that the observing team submitted their findings for peer review and has requested additional JWST time to confirm.</p>
+<h2>The Red Dwarf Problem</h2>
+<p>Interpreting atmospheric signals around TRAPPIST-1e is not straightforward. Red dwarf stars are magnetically active — they produce flares and stellar spots that can masquerade as atmospheric absorption features in transmission spectra. The JWST team applied stellar contamination corrections to their data, but some astronomers argue these corrections cannot be made with sufficient precision to claim a genuine atmospheric detection. The debate will not be resolved until additional transit observations are obtained across a wider wavelength range.</p>
+<blockquote>"This is not a detection of an ocean. It is not even a definitive detection of water vapour. It is a signal that is consistent with water vapour and inconsistent with no atmosphere at all, which is already extraordinary." — Dr. Laetitia Delrez, University of Liège</blockquote>
+<p>The alternative — that TRAPPIST-1e has no atmosphere, like the Moon — is actually a significant concern. Red dwarf habitable zone planets are bombarded by extreme ultraviolet radiation and stellar wind early in their host star's life, when the star is brightest and most active. Atmospheric stripping is a plausible outcome, and some TRAPPIST system planets have already shown flat, featureless transmission spectra consistent with no atmosphere or a high-mean-molecular-weight atmosphere too thin to detect.</p>
+<h2>What Confirmation Would Mean</h2>
+<p>If additional JWST observations confirm the water vapour signature and rule out stellar contamination as its source, TRAPPIST-1e will become the first exoplanet to show confirmed spectroscopic evidence of a compound essential to life as we know it. It would not be evidence of life — water is common in the universe and can exist in planets' atmospheres through geological processes alone. But it would demonstrate that rocky, temperate, atmospherically intact worlds exist within range of Earth's telescopes, and that the chemistry of those atmospheres is accessible to observation.</p>
+<div class="fact-box"><strong>TRAPPIST-1e Facts</strong>Distance: 39.5 light-years · Orbital period: 6.1 days · Radius: 0.92 × Earth · Mass: 0.77 × Earth · Stellar flux: ~0.66 × Earth's · Signal significance: 3.5σ · Follow-up time requested: 50+ transit hours</div>
+<p>The broader TRAPPIST-1 programme occupies more than 500 hours of approved JWST time across multiple cycles. As the data accumulates, planet by planet, transit by transit, the system is slowly yielding its secrets. Whether any of those secrets include liquid water — or the chemistry of a living world — remains the most consequential open question in modern astronomy.</p>`
+  },
+  'a005': {
+    kicker: 'Supernovae · Stellar Physics',
+    deck: 'The massive star N6946-BH1 appears to have collapsed directly into a black hole without a conventional supernova explosion — one of the rarest events in stellar physics, now caught in multi-wavelength data.',
+    imgCap: 'Before/after Hubble images of N6946-BH1 disappearance site · NASA/ESA/C. Kochanek',
+    body: `<p class="drop-cap">Stars die loudly. When a massive star exhausts its nuclear fuel, its core collapses in milliseconds, triggering a shock wave that tears the star apart and briefly outshines entire galaxies. A supernova is one of the most violent events in the universe, visible across billions of light-years. Which is what makes the disappearance of N6946-BH1 so strange. It did not go out in a blaze of glory. It simply went out.</p>
+<p>N6946-BH1 was a red supergiant approximately 25 times the mass of our Sun, located in the Fireworks Galaxy (NGC 6946) about 22 million light-years away. In 2009, it underwent a brief, modest brightening — classified at the time as a potential luminous blue variable eruption. Then, over the following years, it faded. By 2015, the star was gone. Hubble imaging found only a faint infrared source at its position — consistent with heated dust around the site, but no surviving star.</p>
+<h2>The Failed Supernova</h2>
+<p>The leading explanation is a "failed supernova" — a direct collapse of the stellar core to a black hole without a successful shock revival. In a conventional core-collapse supernova, the infalling stellar material bounces off the hyper-dense proto-neutron star, and the resulting shock, re-energised by neutrino heating, successfully explodes the star. In a failed supernova, the proto-neutron star accumulates too much mass before the shock can escape, collapses directly to a black hole, and the shock stalls. The stellar envelope falls inward. The star vanishes.</p>
+<blockquote>"What we're seeing is the opposite of a supernova. Instead of a catastrophic release of energy, there's an implosion. The star swallows itself." — Dr. Christopher Kochanek, Ohio State University</blockquote>
+<p>Multi-wavelength follow-up using Hubble, Spitzer, and the Large Binocular Telescope has strengthened the failed supernova interpretation. The infrared excess at the site is consistent with the ejection of a modest amount of material — the stellar envelope's outermost layers — which is predicted by some failed supernova models as the shock briefly stalls before the black hole forms. There is no X-ray source at the location, arguing against a surviving neutron star or ongoing accretion at levels that would be visible.</p>
+<h2>Implications for Stellar Evolution</h2>
+<p>Failed supernovae are predicted by stellar evolution theory. For stars above a certain mass threshold — roughly 20–25 solar masses, depending on metallicity and rotation — the core may be too massive for successful shock revival. These stars should simply disappear. The question has always been how common this is. N6946-BH1 is one of the best candidates identified in the local universe, and its confirmation as a failed supernova — still pending, but increasingly likely — would validate a missing piece of the stellar graveyard.</p>
+<div class="fact-box"><strong>N6946-BH1 Data</strong>Host galaxy: NGC 6946 (Fireworks Galaxy) · Distance: ~22 million light-years · Initial mass: ~25 M☉ · Disappearance detected: 2015 · Remnant: Faint IR source only · Black hole mass estimate: ~20–24 M☉</div>
+<p>The broader implication is for the black hole mass distribution. If stars above 20 solar masses frequently undergo direct collapse, the resulting black holes are more massive than those produced by conventional supernovae — which can lose significant mass during explosion. This contributes to the population of black holes in the 20–50 solar mass range that gravitational wave observatories like LIGO and Virgo routinely detect merging. The universe's black holes may be born, in significant numbers, not from explosions, but from silence.</p>`
+  },
+  'a006': {
+    kicker: 'Technology · ESA',
+    deck: 'The European Space Agency has formally approved a concept study for a 100-kilometre baseline radio interferometry array on the lunar far side — a telescope that could observe the cosmic dark ages for the first time.',
+    imgCap: 'Lunar far side from Chang\'e-5 approach · CNSA/CLEP',
+    body: `<p class="drop-cap">The Moon's far side is one of the most scientifically valuable pieces of real estate in the solar system. It never faces Earth. The planet that generates the solar system's most intense man-made radio frequency interference is permanently below the horizon. For low-frequency radio astronomy — observing signals at wavelengths between 1 and 30 metres — this creates an environment that simply does not exist anywhere else within reach: a radio-quiet zone, shielded by 3,474 kilometres of solid rock from the electromagnetic cacophony of human civilisation.</p>
+<p>This is why the European Space Agency, in its latest science programme review, has formally approved a feasibility study for FARSIDE — Farside Array for Radio Science Investigations of the Dark ages and Exoplanets. The concept: a distributed array of dipole antennas deployed across a 100-kilometre baseline on the lunar far side, operating between 0.1 and 40 MHz, connected by a surface relay network to a small orbiting satellite that returns data to Earth.</p>
+<h2>The Cosmic Dark Ages</h2>
+<p>The scientific targets for FARSIDE are extraordinary. The primary target is the cosmic dark ages — the period between 380,000 and 150 million years after the Big Bang when the universe was filled with neutral hydrogen gas, opaque to most light, producing no stars or galaxies. The only signal from this era accessible to astronomy is the redshifted 21-centimetre spin-flip line of neutral hydrogen, which at the relevant cosmological distances arrives at frequencies below 30 MHz. These frequencies are completely blocked by Earth's ionosphere and swamped by terrestrial interference. A lunar far-side array is the only feasible observatory for this epoch.</p>
+<blockquote>"The dark ages are not dark to radio telescopes. They are a snapshot of the universe before any star had ever ignited — an untouched initial condition. Everything that came after evolved from that state." — Dr. Léon Koopmans, LOFAR Science Council</blockquote>
+<p>Mapping the 21-cm signal from the dark ages would provide observational constraints on fundamental cosmology that no other measurement technique can access: the matter power spectrum at scales smaller than anything probed by the CMB, the temperature of the intergalactic medium before reionisation, and the nature of dark matter at masses and interaction cross-sections beyond the reach of particle accelerators. It is, in some assessments, the most information-rich untapped dataset in all of cosmology.</p>
+<h2>The Engineering Challenge</h2>
+<p>Getting a 100-kilometre antenna array to the lunar far side is a formidable engineering problem. The ESA concept proposes deploying antennas by rover from a central hub lander, using a low-power mesh network for inter-antenna communication, and relaying science data through a Lagrange point relay satellite. Power comes from radioisotope thermoelectric generators — the far side experiences two-week lunar nights during which solar power is unavailable.</p>
+<div class="fact-box"><strong>FARSIDE Concept Specs</strong>Baseline: 100 km · Frequency range: 0.1–40 MHz · Antenna elements: ~128 dipoles · Data relay: L2 orbital satellite · Power: RTG + solar hybrid · Target launch: early 2030s · Lead agency: ESA with NASA collaboration</div>
+<p>China's Chang'e programme has already demonstrated precision landing on the far side — Chang'e-4 and its Yutu-2 rover have operated there since 2019. Whether FARSIDE becomes a purely ESA programme, an international collaboration, or is complemented by parallel Chinese or NASA concepts remains open. What is clear is that the scientific case is airtight, the technology is within reach, and the window of lunar radio-quiet is not guaranteed to remain: the rise of commercial lunar landers and potential far-side communication satellites could one day compromise the very isolation that makes this observatory possible.</p>`
+  }
+};
+
+function openArticle(id) {
+  const a = ARTICLES.find(x => x.id === id);
+  const c = ARTICLE_CONTENT[id];
+  if (!a || !c) { console.error('Article not found:', id); return; }
+  const page = document.getElementById('artPage');
+  if (!page) { console.error('artPage element not found'); return; }
+  document.getElementById('artKicker').textContent = c.kicker;
+  document.getElementById('artH1').textContent = a.title;
+  document.getElementById('artDeck').textContent = c.deck;
+  document.getElementById('artBylineAuthor').textContent = 'Event Horizon Editorial Team';
+  document.getElementById('artBylineDate').textContent = a.date;
+  document.getElementById('artBylineRead').textContent = a.read;
+  document.getElementById('artHeroImg').src = a.img;
+  document.getElementById('artHeroImg').alt = a.alt;
+  document.getElementById('artHeroCap').textContent = c.imgCap;
+  document.getElementById('artBody').innerHTML = c.body;
+  document.getElementById('artFootTag').textContent = a.tag + ' · ' + a.date;
+  page.classList.add('open');
+  page.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeArticle() {
+  const page = document.getElementById('artPage');
+  if (page) page.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Wire artPage scroll progress after full page load
+window.addEventListener('load', function() {
+  const ap = document.getElementById('artPage');
+  if (ap) {
+    ap.addEventListener('scroll', function() {
+      const pct = (this.scrollTop / (this.scrollHeight - this.clientHeight)) * 100;
+      const bar = document.getElementById('artScrollBar');
+      if (bar) bar.style.width = Math.min(pct,100) + '%';
+    });
+  }
+});
+
+// Cards get onclick added during render below
 </script>
+
+<!-- ARTICLE READER PAGE -->
+<div class="art-page" id="artPage">
+  <div class="art-topbar">
+    <button class="art-back" onclick="closeArticle()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Event Horizon
+    </button>
+    <div style="font-family:var(--f-mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim2)">Event &amp; Horizon</div>
+    <div id="artScrollBar" class="art-progress"></div>
+  </div>
+  <div class="art-wrap">
+    <div class="art-kicker" id="artKicker"></div>
+    <h1 class="art-h1" id="artH1"></h1>
+    <p class="art-deck" id="artDeck"></p>
+    <div class="art-byline">
+      <span id="artBylineAuthor"></span>
+      <span class="art-byline-sep">·</span>
+      <span id="artBylineDate"></span>
+      <span class="art-byline-sep">·</span>
+      <span class="read-badge" id="artBylineRead"></span>
+    </div>
+    <div class="art-hero-img">
+      <img id="artHeroImg" src="" alt="">
+      <div class="art-hero-cap" id="artHeroCap"></div>
+    </div>
+    <div class="art-body" id="artBody"></div>
+    <div class="art-foot">
+      <div class="art-foot-tag" id="artFootTag"></div>
+      <div class="art-share">
+        <button class="art-share-btn" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='Copied!'">Copy Link</button>
+        <button class="art-share-btn" onclick="closeArticle()">← All Articles</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
