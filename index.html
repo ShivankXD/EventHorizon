@@ -393,50 +393,6 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .comment-reply{font-family:var(--f-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);cursor:pointer;margin-top:.5rem;display:inline-block;transition:color .15s}
 .comment-reply:hover{color:var(--red)}
 
-/* ══ AI GENERATOR ══ */
-.gen{background:var(--ink2);padding:4rem var(--px)}
-.gen-inner{max-width:var(--w);margin:0 auto}
-.gen-hd{padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2.5rem}
-.gen-eye{font-family:var(--f-mono);font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red2);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
-.gen-dot{width:5px;height:5px;border-radius:50%;background:var(--red2);animation:pulse 2.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
-.gen-title{font-family:var(--f-head);font-weight:700;font-size:clamp(1.5rem,3vw,2.2rem);color:rgba(246,243,238,.88);line-height:1.1}
-.gen-sub{font-family:var(--f-mono);font-size:.52rem;color:rgba(246,243,238,.22);letter-spacing:.1em;margin-top:.3rem}
-.gen-body{display:grid;grid-template-columns:240px 1fr;gap:3rem;align-items:start}
-@media(max-width:700px){.gen-body{grid-template-columns:1fr}}
-.gen-topics-lbl{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,243,238,.22);margin-bottom:.7rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.06)}
-.gen-topic{display:flex;align-items:center;gap:.65rem;padding:.52rem .65rem;cursor:pointer;border:1px solid transparent;transition:all .14s;margin-bottom:2px}
-.gen-topic:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.07)}
-.gen-topic.on{background:rgba(181,43,24,.1);border-color:rgba(181,43,24,.32)}
-.gen-ti{font-size:.82rem;flex-shrink:0}
-.gen-tt{font-family:var(--f-mono);font-size:.58rem;letter-spacing:.05em;color:rgba(246,243,238,.38);line-height:1.3}
-.gen-topic:hover .gen-tt,.gen-topic.on .gen-tt{color:rgba(246,243,238,.82)}
-.gen-flbl{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,243,238,.22);margin-bottom:.55rem}
-.gen-irow{display:flex;border:1px solid rgba(255,255,255,.1)}
-.gen-inp{flex:1;background:rgba(255,255,255,.04);border:none;outline:none;padding:.82rem 1rem;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.04em;color:rgba(246,243,238,.82);transition:background .15s}
-.gen-inp:focus{background:rgba(255,255,255,.07)}
-.gen-inp::placeholder{color:rgba(246,243,238,.18)}
-.gen-btn{background:var(--red);border:none;color:white;padding:.82rem 1.35rem;font-family:var(--f-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .15s;white-space:nowrap;flex-shrink:0}
-.gen-btn:hover{background:var(--red2)}
-.gen-btn:disabled{background:rgba(181,43,24,.28);cursor:not-allowed}
-.gen-loader{display:none;align-items:center;gap:.7rem;padding:.9rem 0;font-family:var(--f-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,243,238,.28)}
-.gen-loader.on{display:flex}
-.gen-spin{width:13px;height:13px;flex-shrink:0;border:1px solid rgba(255,255,255,.1);border-top-color:var(--red2);border-radius:50%;animation:spin .7s linear infinite}
-.gen-out{display:none;border:1px solid rgba(255,255,255,.07);margin-top:1.2rem;background:rgba(255,255,255,.025)}
-.gen-out.on{display:block}
-.gen-out-hd{padding:1.35rem 1.55rem 1rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.gen-out-cat{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.24em;text-transform:uppercase;color:var(--red2);margin-bottom:.45rem}
-.gen-out-title{font-family:var(--f-head);font-weight:700;font-size:1.42rem;line-height:1.15;color:rgba(246,243,238,.88);margin-bottom:.35rem}
-.gen-out-meta{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.07em;color:rgba(246,243,238,.22)}
-.gen-out-body{padding:1.35rem 1.55rem;font-family:var(--f-body);font-size:.9rem;line-height:1.78;color:rgba(246,243,238,.58)}
-.gen-out-body p+p{margin-top:.82em}
-.gen-out-body em{color:rgba(246,243,238,.78);font-style:italic}
-.gen-acts{display:none;gap:.4rem;padding:0 1.55rem 1.35rem;flex-wrap:wrap}
-.gen-acts.on{display:flex}
-.gen-act{background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(246,243,238,.38);padding:.38rem .82rem;font-family:var(--f-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .14s}
-.gen-act:hover{border-color:rgba(255,255,255,.25);color:rgba(246,243,238,.78)}
-.gen-act.p{background:rgba(181,43,24,.12);border-color:rgba(181,43,24,.38);color:rgba(212,53,32,.82)}
-.gen-act.p:hover{background:rgba(181,43,24,.22);color:#e04030}
 
 /* ══ ARTICLE READER PAGE ══ */
 .art-page{display:none;position:fixed;inset:0;z-index:600;background:var(--paper);overflow-y:auto;transition:background .3s}
@@ -521,7 +477,6 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     <div class="visitor-pill"><div class="visitor-dot"></div><span id="visitorCount">—</span> reading now</div>
     <a href="#">Archive</a>
     <a href="#">About</a>
-    <a href="#gen">AI Writer</a>
   </div>
 </div>
 
@@ -768,43 +723,6 @@ async function submitBeehiiv(e) {
   </div>
 </div>
 
-<!-- AI GENERATOR -->
-<section class="gen" id="gen">
-  <div class="gen-inner">
-    <div class="gen-hd">
-      <div class="gen-eye"><div class="gen-dot"></div>AI-Powered</div>
-      <div class="gen-title">Article Generator</div>
-      <div class="gen-sub">Powered by Claude · Publish-ready drafts in seconds</div>
-    </div>
-    <div class="gen-body">
-      <div>
-        <div class="gen-topics-lbl">Quick Topics</div>
-        <div id="topicsList"></div>
-      </div>
-      <div>
-        <div class="gen-flbl">Custom Topic</div>
-        <div class="gen-irow">
-          <input class="gen-inp" id="topicInput" placeholder="e.g. Fast radio burst origins">
-          <button class="gen-btn" id="genBtn" onclick="genArticle()">Generate</button>
-        </div>
-        <div class="gen-loader" id="genLoader"><div class="gen-spin"></div>Composing — stand by</div>
-        <div class="gen-out" id="genOut">
-          <div class="gen-out-hd">
-            <div class="gen-out-cat" id="outCat"></div>
-            <div class="gen-out-title" id="outTitle"></div>
-            <div class="gen-out-meta" id="outMeta"></div>
-          </div>
-          <div class="gen-out-body" id="outBody"></div>
-          <div class="gen-acts" id="genActs">
-            <button class="gen-act" onclick="copyArt()">Copy Markdown</button>
-            <button class="gen-act" onclick="saveArt()">Download JSON</button>
-            <button class="gen-act p" onclick="addFeed()">Add to Feed →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
 <!-- FOOTER -->
@@ -1067,42 +985,6 @@ function postComment() {
   renderComments();
 }
 renderComments();
-
-/* ══ TOPICS ══ */
-const TOPICS=[['🪐','Exoplanet atmospheres & habitability'],['⚫','Supermassive black holes'],['🌌','Dark matter & dark energy'],['💫','Neutron stars & gravitational waves'],['🔭','JWST deep-field findings'],['🚀','Mars sample return mission'],['☄️','Asteroid mining & resources'],['🌠','Fast radio bursts mystery']];
-let selTopic='';
-const tl=document.getElementById('topicsList');
-TOPICS.forEach(([icon,text])=>{
-  const el=document.createElement('div');el.className='gen-topic';
-  el.innerHTML=`<span class="gen-ti">${icon}</span><span class="gen-tt">${text}</span>`;
-  el.onclick=()=>{document.querySelectorAll('.gen-topic').forEach(t=>t.classList.remove('on'));el.classList.add('on');selTopic=text;document.getElementById('topicInput').value=text};
-  tl.appendChild(el);
-});
-
-/* ══ AI GENERATE ══ */
-let lastArt=null;
-async function genArticle(){
-  const topic=document.getElementById('topicInput').value.trim()||selTopic||'a recent space discovery';
-  const btn=document.getElementById('genBtn'),loader=document.getElementById('genLoader'),out=document.getElementById('genOut'),acts=document.getElementById('genActs');
-  btn.disabled=true;loader.classList.add('on');out.classList.remove('on');acts.classList.remove('on');
-  try{
-    const res=await fetch('https://event-horizon-proxy.YOUR-SUBDOMAIN.workers.dev/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic})});
-    const art=await res.json();
-    lastArt=art;
-    document.getElementById('outCat').textContent=art.category;
-    document.getElementById('outTitle').textContent=art.title;
-    document.getElementById('outMeta').textContent=`${art.readTime} · Generated ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`;
-    document.getElementById('outBody').innerHTML=`<p><em>${art.intro}</em></p><p>${art.p1}</p><p>${art.p2}</p><p>${art.p3}</p><p><em>${art.closing}</em></p>`;
-    out.classList.add('on');acts.classList.add('on');
-  }catch(e){
-    document.getElementById('outCat').textContent='Error';document.getElementById('outTitle').textContent='Generation failed';document.getElementById('outMeta').textContent='';document.getElementById('outBody').innerHTML=`<p>${e.message}</p>`;out.classList.add('on');
-  }
-  loader.classList.remove('on');btn.disabled=false;
-}
-function copyArt(){if(!lastArt)return;const md=`# ${lastArt.title}\n\n*${lastArt.category} · ${lastArt.readTime}*\n\n${lastArt.intro}\n\n${lastArt.p1}\n\n${lastArt.p2}\n\n${lastArt.p3}\n\n${lastArt.closing}`;navigator.clipboard.writeText(md);alert('Copied as Markdown.')}
-function saveArt(){if(!lastArt)return;const b=new Blob([JSON.stringify({...lastArt,date:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`article-${Date.now()}.json`;a.click()}
-function addFeed(){alert('In production: commits article JSON to your GitHub repo → triggers Netlify rebuild → live in ~30 seconds.')}
-document.getElementById('topicInput').addEventListener('keydown',e=>{if(e.key==='Enter')genArticle()});
 
 /* ══ ARTICLE READER ══ */
 const ARTICLE_CONTENT = {
