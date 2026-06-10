@@ -15,15 +15,16 @@
 
 *Below is the front page layout featuring our custom typography scale, layout grids, and interactive widgets. Replace these placeholder paths with your actual screenshots.*
 
-```markdown
 <!-- Front page hero and sidebar layout -->
-![Front Page Mockup](https://raw.githubusercontent.com/ShivankXD/EventHorizon/main/screenshot_hero.png)
-```
+![Front Page Mockup](https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ShivankXD/EventHorizon/main/screenshot_dark.png" width="48%" alt="Dark Mode Edition" />
-  <img src="https://raw.githubusercontent.com/ShivankXD/EventHorizon/main/screenshot_calendar.png" width="48%" alt="Astronomical Calendar & Widgets" />
+  <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=600&q=80" width="48%" alt="Cosmic Edition" />
+  <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?auto=format&fit=crop&w=600&q=80" width="48%" alt="Stargazing & Calendar" />
 </p>
+
+> 💡 **Tip for Custom Screenshots:** The images above are stunning space photography placeholders. To display your own website screenshots here, just drop your files (named `screenshot_hero.png`, `screenshot_dark.png`, etc.) in the root folder of this project, change the image paths to point to your files (e.g., `./screenshot_hero.png`), and commit them!
+
 
 ---
 
