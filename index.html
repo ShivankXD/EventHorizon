@@ -442,6 +442,214 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .footer-legal{display:flex;gap:1.5rem}
 .footer-legal a{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.1em;color:rgba(246,243,238,.18);transition:color .14s}
 .footer-legal a:hover{color:rgba(246,243,238,.5)}
+
+/* ══ ON THIS DAY BANNER ══ */
+.otd-banner{
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:.7rem var(--px);
+  border-bottom:2px solid var(--red);
+  position:relative;
+  animation:fadeUp .4s ease both;
+}
+.otd-banner.hidden{display:none}
+.otd-left{display:flex;align-items:center;gap:1.1rem;flex:1;min-width:0}
+.otd-badge{
+  flex-shrink:0;
+  background:var(--red);color:white;
+  font-family:var(--f-mono);font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;
+  padding:.28rem .7rem;white-space:nowrap;
+}
+.otd-date{
+  font-family:var(--f-mono);font-size:.52rem;letter-spacing:.12em;
+  color:var(--gold);white-space:nowrap;flex-shrink:0;
+}
+.otd-sep{color:rgba(246,243,238,.2);flex-shrink:0}
+.otd-text{
+  font-family:var(--f-body);font-size:.85rem;font-style:italic;
+  color:rgba(246,243,238,.82);line-height:1.4;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.otd-close{
+  flex-shrink:0;
+  font-family:var(--f-mono);font-size:.7rem;color:rgba(246,243,238,.35);
+  cursor:pointer;padding:.2rem .4rem;transition:color .15s;line-height:1;
+  background:none;border:none;
+}
+.otd-close:hover{color:rgba(246,243,238,.8)}
+@media(max-width:640px){.otd-text{display:none}.otd-sep{display:none}}
+
+/* ══ LAUNCH WIDGET ══ */
+.launches-section{
+  background:var(--paper2);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:2.5rem var(--px);
+}
+.launches-inner{max-width:var(--w);margin:0 auto}
+.launches-hd{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
+.launches-title{font-family:var(--f-mono);font-size:.56rem;letter-spacing:.35em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.launches-line{flex:1;height:1px;background:var(--rule2)}
+.launches-live{display:flex;align-items:center;gap:.4rem;font-family:var(--f-mono);font-size:.48rem;letter-spacing:.1em;color:#4caf50;white-space:nowrap}
+.launches-live-dot{width:6px;height:6px;border-radius:50%;background:#4caf50;animation:vpulse 2s ease-in-out infinite}
+.launches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink);border-left:1px solid var(--rule)}
+@media(max-width:840px){.launches-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.launches-grid{grid-template-columns:1fr}}
+.launch-card{
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:1.4rem 1.3rem;
+  position:relative;overflow:hidden;
+  background:var(--paper);
+  transition:background .2s;
+}
+.launch-card:hover{background:var(--paper2)}
+.launch-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .28s ease;
+}
+.launch-card:hover::before{transform:scaleX(1)}
+.lc-agency{font-family:var(--f-mono);font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
+.lc-name{font-family:var(--f-head);font-weight:700;font-size:1.05rem;line-height:1.2;color:var(--ink);margin-bottom:.3rem}
+.lc-payload{font-family:var(--f-body);font-size:.8rem;font-style:italic;color:var(--dim);margin-bottom:.9rem;line-height:1.4}
+.lc-countdown{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;
+  margin-bottom:.8rem;
+}
+.lc-unit{text-align:center;background:var(--paper3,var(--paper2));border:1px solid var(--rule);padding:.4rem .2rem}
+.lc-num{font-family:var(--f-mono);font-size:1.2rem;font-weight:500;color:var(--ink);line-height:1;display:block}
+.lc-lbl{font-family:var(--f-mono);font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim2);display:block;margin-top:.2rem}
+.lc-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+.lc-site{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.06em;color:var(--dim2)}
+.lc-status{font-family:var(--f-mono);font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;padding:.18rem .5rem;border:1px solid}
+.lc-status.go{color:#2d7a3a;border-color:rgba(45,122,58,.3);background:rgba(45,122,58,.06)}
+.lc-status.tbd{color:var(--gold);border-color:rgba(156,122,40,.3);background:rgba(156,122,40,.06)}
+.lc-status.hold{color:var(--red);border-color:rgba(181,43,24,.3);background:rgba(181,43,24,.06)}
+
+/* ══ SPACE EVENTS CALENDAR ══ */
+.cal-section{
+  padding:2.5rem var(--px) 3rem;
+  border-bottom:1px solid var(--rule);
+}
+.cal-inner{max-width:var(--w);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:2.5rem;align-items:start}
+@media(max-width:860px){.cal-inner{grid-template-columns:1fr}}
+.cal-hd{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
+.cal-title{font-family:var(--f-mono);font-size:.56rem;letter-spacing:.35em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.cal-line{flex:1;height:1px;background:var(--rule2)}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.cal-month-name{font-family:var(--f-head);font-weight:700;font-size:1.1rem;color:var(--ink)}
+.cal-arrows{display:flex;gap:.4rem}
+.cal-arrow{
+  background:none;border:1px solid var(--rule2);color:var(--dim);
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .15s;font-size:.8rem;
+}
+.cal-arrow:hover{border-color:var(--ink);color:var(--ink)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border-top:2px solid var(--ink);border-left:1px solid var(--rule)}
+.cal-day-hd{
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:.4rem 0;text-align:center;
+  font-family:var(--f-mono);font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim2);background:var(--paper2);
+}
+.cal-cell{
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  min-height:52px;padding:.4rem .5rem;
+  position:relative;cursor:default;
+  transition:background .15s;
+  background:var(--paper);
+}
+.cal-cell.other-month{background:var(--paper2);opacity:.45}
+.cal-cell.today{background:rgba(181,43,24,.05);border-right-color:var(--rule)}
+.cal-cell.today .cal-date{color:var(--red);font-weight:700}
+.cal-cell.has-event{cursor:pointer}
+.cal-cell.has-event:hover{background:var(--paper2)}
+.cal-date{
+  font-family:var(--f-mono);font-size:.52rem;color:var(--dim2);
+  display:block;margin-bottom:.25rem;line-height:1;
+}
+.cal-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--red);position:absolute;bottom:.4rem;right:.5rem;
+}
+.cal-dot.gold{background:var(--gold)}
+.cal-dot.navy{background:var(--navy)}
+/* Calendar sidebar event list */
+.cal-events-list{padding-top:.4rem}
+.cal-events-lbl{font-family:var(--f-mono);font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:var(--dim2);padding-bottom:.6rem;border-bottom:2px solid var(--ink);margin-bottom:1rem}
+.cal-event-item{
+  padding:.8rem 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;transition:opacity .15s;
+}
+.cal-event-item:last-child{border-bottom:none}
+.cal-event-item:hover{opacity:.7}
+.cev-date{font-family:var(--f-mono);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:.2rem}
+.cev-name{font-family:var(--f-head);font-weight:600;font-size:.95rem;line-height:1.2;color:var(--ink);margin-bottom:.15rem}
+.cev-type{font-family:var(--f-mono);font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+/* Calendar event modal */
+.cal-modal{
+  position:fixed;inset:0;z-index:700;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(3px);
+  padding:1rem;
+}
+.cal-modal.open{display:flex}
+.cal-modal-box{
+  background:var(--paper);border:1px solid var(--rule);
+  max-width:480px;width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+  animation:fadeUp .25s ease;
+}
+.cal-modal-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 1.4rem;border-bottom:2px solid var(--ink);
+}
+.cal-modal-tag{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
+.cal-modal-close{font-family:var(--f-mono);font-size:.6rem;color:var(--dim);cursor:pointer;transition:color .15s;background:none;border:none}
+.cal-modal-close:hover{color:var(--red)}
+.cal-modal-body{padding:1.4rem}
+.cal-modal-date{font-family:var(--f-mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.cal-modal-name{font-family:var(--f-head);font-weight:700;font-size:1.4rem;line-height:1.1;color:var(--ink);margin-bottom:.8rem}
+.cal-modal-desc{font-family:var(--f-body);font-size:.92rem;font-style:italic;color:var(--dim);line-height:1.65}
+.cal-modal-meta{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--rule);display:flex;gap:1.5rem;flex-wrap:wrap}
+.cal-modal-meta-item{font-family:var(--f-mono);font-size:.48rem;letter-spacing:.08em;color:var(--dim2)}
+.cal-modal-meta-item strong{display:block;color:var(--ink);margin-bottom:.15rem;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase}
+
+/* ══ TOAST NOTIFICATION STACK ══ */
+.toast-stack{
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  z-index:800;
+  display:flex;flex-direction:column;gap:.7rem;
+  align-items:flex-end;
+  pointer-events:none;
+}
+.toast{
+  background:var(--paper);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--red);
+  box-shadow:0 8px 30px rgba(0,0,0,.18);
+  width:320px;max-width:calc(100vw - 2rem);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  pointer-events:all;
+  animation:toastIn .35s cubic-bezier(.34,1.56,.64,1) both;
+  position:relative;
+}
+.toast.removing{animation:toastOut .3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(110%)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastOut{to{opacity:0;transform:translateX(110%)}}
+.toast-inner{display:flex;gap:.8rem;padding:.85rem .9rem .75rem;align-items:start}
+.toast-img{width:52px;height:40px;overflow:hidden;flex-shrink:0;border:1px solid var(--rule)}
+.toast-img img{width:100%;height:100%;object-fit:cover}
+.toast-content{flex:1;min-width:0}
+.toast-label{font-family:var(--f-mono);font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.2rem}
+.toast-headline{font-family:var(--f-head);font-weight:600;font-size:.88rem;line-height:1.22;color:var(--ink);margin-bottom:.35rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.toast-actions{display:flex;align-items:center;gap:.5rem}
+.toast-read{font-family:var(--f-mono);font-size:.46rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);cursor:pointer;border:none;background:none;padding:0;transition:opacity .15s}
+.toast-read:hover{opacity:.65}
+.toast-close-btn{font-family:var(--f-mono);font-size:.6rem;color:var(--dim2);cursor:pointer;border:none;background:none;padding:0;margin-left:auto;transition:color .15s;line-height:1}
+.toast-close-btn:hover{color:var(--ink)}
+.toast-progress{height:2px;background:var(--red);transform-origin:left;animation:toastProg 6s linear forwards}
+@keyframes toastProg{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 </style>
 </head>
 <body>
@@ -534,6 +742,17 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   <button class="cat-btn" data-cat="Technology">Technology</button>
 </div>
 
+<!-- ON THIS DAY BANNER -->
+<div class="otd-banner" id="otdBanner">
+  <div class="otd-left">
+    <span class="otd-badge">On This Day</span>
+    <span class="otd-date" id="otdDate"></span>
+    <span class="otd-sep">—</span>
+    <span class="otd-text" id="otdText"></span>
+  </div>
+  <button class="otd-close" id="otdClose" aria-label="Dismiss">✕</button>
+</div>
+
 <!-- HERO -->
 <main>
 <div class="hero">
@@ -586,6 +805,58 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     <span class="sec-hd-ct" id="articleCount">6 Articles</span>
   </div>
   <div class="agrid" id="agrid"></div>
+</div>
+
+<!-- THIS WEEK IN SPACE — LAUNCH WIDGET -->
+<div class="launches-section">
+  <div class="launches-inner">
+    <div class="launches-hd">
+      <span class="launches-title">This Week in Space — Upcoming Launches</span>
+      <div class="launches-line"></div>
+      <div class="launches-live"><div class="launches-live-dot"></div>Live Countdowns</div>
+    </div>
+    <div class="launches-grid" id="launchGrid"></div>
+  </div>
+</div>
+
+<!-- SPACE EVENTS CALENDAR -->
+<div class="cal-section">
+  <div class="cal-inner">
+    <div>
+      <div class="cal-hd">
+        <span class="cal-title">Space Events Calendar</span>
+        <div class="cal-line"></div>
+      </div>
+      <div class="cal-nav">
+        <div class="cal-month-name" id="calMonthName"></div>
+        <div class="cal-arrows">
+          <button class="cal-arrow" id="calPrev">&#8249;</button>
+          <button class="cal-arrow" id="calNext">&#8250;</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+    <div class="cal-events-list">
+      <div class="cal-events-lbl">Upcoming Events This Month</div>
+      <div id="calEventsList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR EVENT MODAL -->
+<div class="cal-modal" id="calModal" onclick="if(event.target===this)closeCalModal()">
+  <div class="cal-modal-box">
+    <div class="cal-modal-hd">
+      <span class="cal-modal-tag" id="calModalTag"></span>
+      <button class="cal-modal-close" onclick="closeCalModal()">Close ✕</button>
+    </div>
+    <div class="cal-modal-body">
+      <div class="cal-modal-date" id="calModalDate"></div>
+      <div class="cal-modal-name" id="calModalName"></div>
+      <div class="cal-modal-desc" id="calModalDesc"></div>
+      <div class="cal-modal-meta" id="calModalMeta"></div>
+    </div>
+  </div>
 </div>
 
 <!-- IMAGE BREAK -->
@@ -837,7 +1108,11 @@ document.addEventListener('click', e => {
 });
 
 /* ══ BOOKMARKS ══ */
-let bookmarks = JSON.parse(localStorage.getItem('eh_bookmarks') || '[]');
+/* Safe localStorage read — prevents JSON.parse crash (corrupted data / private mode)
+   from killing the entire script and causing articles to never render. */
+let bookmarks = [];
+try { bookmarks = JSON.parse(localStorage.getItem('eh_bookmarks') || '[]'); }
+catch(e) { try { localStorage.removeItem('eh_bookmarks'); } catch(_){} }
 function updateBmCount() {
   const cnt = document.getElementById('bmCount');
   cnt.textContent = bookmarks.length;
@@ -911,6 +1186,13 @@ document.querySelectorAll('.nav-item[data-cat]').forEach(item => {
 
 /* ══ RENDER ARTICLE CARDS ══ */
 const grid = document.getElementById('agrid');
+/* Fix: Use a DocumentFragment so all cards are inserted in ONE DOM operation.
+   Then force a synchronous reflow (void grid.offsetHeight) BEFORE the next
+   paint so the browser correctly triggers the fadeUp CSS animation on each
+   card. Without this reflow, Chromium sometimes skips animating dynamically
+   inserted elements that have animation-fill-mode:both, leaving them at
+   opacity:0 permanently — the core cause of the "articles disappear" bug. */
+const cardFragment = document.createDocumentFragment();
 ARTICLES.forEach(a => {
   const c = document.createElement('div');
   c.className = 'acard';
@@ -933,8 +1215,11 @@ ARTICLES.forEach(a => {
       </div>
     </div>`;
   c.addEventListener('click', (function(id){ return function(e){ if(e.target.closest('.card-bm')) return; openArticle(id); }; })(a.id));
-  grid.appendChild(c);
+  cardFragment.appendChild(c);
 });
+grid.appendChild(cardFragment);   // single DOM write
+void grid.offsetHeight;           // force reflow → guarantees animation triggers
+document.getElementById('articleCount').textContent = ARTICLES.length + ' Article' + (ARTICLES.length !== 1 ? 's' : '');
 
 /* ══ RELATED ARTICLES ══ */
 const relGrid = document.getElementById('relatedGrid');
@@ -1179,6 +1464,362 @@ window.addEventListener('load', function() {
 });
 
 // Cards get onclick added during render below
+
+/* ══════════════════════════════════════════
+   ON THIS DAY IN SPACE HISTORY
+══════════════════════════════════════════ */
+(function() {
+  const OTD_EVENTS = [
+    {day:1,  year:'1958', text:"Explorer 1, the first successful American satellite, is launched from Cape Canaveral.", months:'February'},
+    {day:2,  year:'1962', text:"John Glenn becomes the first American to orbit Earth aboard Friendship 7.", months:'February'},
+    {day:3,  year:'1972', text:"Pioneer 10 launches — the first spacecraft designed to travel through the asteroid belt.", months:'March'},
+    {day:4,  year:'1968', text:"Apollo 6 is launched, the final unmanned test of the Saturn V rocket.", months:'April'},
+    {day:5,  year:'1961', text:"Alan Shepard becomes the first American in space aboard Freedom 7.", months:'May'},
+    {day:6,  year:'1971', text:"Apollo 15 lands on the Moon — the first mission to deploy a Lunar Roving Vehicle.", months:'July'},
+    {day:7,  year:'1959', text:"Luna 3 transmits the first photographs of the Moon's far side.", months:'October'},
+    {day:8,  year:'2004', text:"NASA's Opportunity rover lands on Mars at Meridiani Planum.", months:'January'},
+    {day:9,  year:'1969', text:"Apollo 9 tests the Lunar Module in Earth orbit for the first time.", months:'March'},
+    {day:10, year:'2019', text:"The Event Horizon Telescope reveals the first-ever image of a black hole, M87*.", months:'April'},
+    {day:11, year:'1970', text:"Apollo 13 is launched — three days later, an oxygen tank ruptures, beginning a dramatic rescue mission.", months:'April'},
+    {day:12, year:'1961', text:"Yuri Gagarin becomes the first human in space, completing one orbit of Earth in Vostok 1.", months:'April'},
+    {day:13, year:'1997', text:"The Galileo spacecraft makes its closest flyby of Ganymede, Jupiter's largest moon.", months:'June'},
+    {day:14, year:'2015', text:"New Horizons makes its historic flyby of Pluto, revealing a heart-shaped nitrogen ice plain.", months:'July'},
+    {day:15, year:'2012', text:"Voyager 1 crosses the heliopause into interstellar space — later confirmed in 2013.", months:'August'},
+    {day:16, year:'1972', text:"Apollo 16 lands on the Moon's Descartes Highlands, the only mission to study the lunar highlands.", months:'April'},
+    {day:17, year:'2016', text:"ExoMars Trace Gas Orbiter launches to search for signs of life in the Martian atmosphere.", months:'March'},
+    {day:18, year:'1965', text:"Alexei Leonov performs the first-ever spacewalk, drifting outside Voskhod 2 for 12 minutes.", months:'March'},
+    {day:19, year:'1971', text:"Salyut 1 is launched — the world's first space station.", months:'April'},
+    {day:20, year:'1969', text:"Apollo 11 lands on the Moon. Neil Armstrong takes humanity's first steps on another world.", months:'July'},
+    {day:21, year:'2011', text:"Messenger becomes the first spacecraft to orbit Mercury.", months:'March'},
+    {day:22, year:'2006', text:"The Stardust mission capsule returns to Earth with comet dust from Wild 2.", months:'January'},
+    {day:23, year:'2021', text:"China's Tianwen-1 rover successfully lands on Mars at Utopia Planitia.", months:'May'},
+    {day:24, year:'1986', text:"The Space Shuttle Challenger disintegrates 73 seconds after launch. Seven crew members lost.", months:'January'},
+    {day:25, year:'1973', text:"Skylab, America's first space station, is launched from Kennedy Space Center.", months:'May'},
+    {day:26, year:'2015', text:"SpaceX successfully lands its Falcon 9 booster for the first time.", months:'December'},
+    {day:27, year:'1967', text:"The Apollo 1 fire kills astronauts Grissom, White, and Chaffee during a launch rehearsal.", months:'January'},
+    {day:28, year:'2000', text:"The first crew arrives at the International Space Station — beginning continuous human presence in orbit.", months:'October'},
+    {day:29, year:'1998', text:"Discovery STS-95 launches with John Glenn aboard, making him the oldest person in space at age 77.", months:'October'},
+    {day:30, year:'2005', text:"Huygens probe lands on Titan, Saturn's moon, returning the first images from its surface.", months:'January'},
+    {day:31, year:'2008', text:"SpaceX's Falcon 1 becomes the first privately funded liquid-fuelled rocket to reach orbit.", months:'September'},
+  ];
+  const today = new Date();
+  const dayOfMonth = today.getDate();
+  const ev = OTD_EVENTS.find(e => e.day === dayOfMonth) || OTD_EVENTS[0];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthName = months[today.getMonth()];
+  const key = 'eh_otd_' + today.toDateString();
+  if (sessionStorage.getItem(key)) {
+    document.getElementById('otdBanner').classList.add('hidden');
+    return;
+  }
+  document.getElementById('otdDate').textContent = monthName + ' ' + dayOfMonth + ', ' + ev.year;
+  document.getElementById('otdText').textContent = ev.text;
+  document.getElementById('otdClose').addEventListener('click', function() {
+    document.getElementById('otdBanner').classList.add('hidden');
+    sessionStorage.setItem(key, '1');
+  });
+})();
+
+/* ══════════════════════════════════════════
+   THIS WEEK IN SPACE — LAUNCH WIDGET
+══════════════════════════════════════════ */
+(function() {
+  const now = new Date();
+  function daysFromNow(d) { return new Date(now.getTime() + d * 86400000); }
+  const LAUNCHES = [
+    {
+      agency:'SpaceX', name:'Falcon 9 · Starlink 11-14',
+      payload:'60 Starlink broadband satellites to 550 km shell',
+      target: daysFromNow(2),
+      site:'LC-40, Cape Canaveral', status:'go'
+    },
+    {
+      agency:'ISRO', name:'PSLV-C61 · EOS-09',
+      payload:'Earth Observation Satellite-09 for maritime & border surveillance',
+      target: daysFromNow(5),
+      site:'SDSC SHAR, Sriharikota', status:'go'
+    },
+    {
+      agency:'ULA · NASA', name:'Vulcan Centaur · Dream Chaser',
+      payload:'Sierra Space Dream Chaser Spaceplane — first orbital flight',
+      target: daysFromNow(11),
+      site:'SLC-41, Cape Canaveral', status:'tbd'
+    },
+    {
+      agency:'Rocket Lab', name:'Electron · NRO L-105',
+      payload:'National Reconnaissance Office classified payload',
+      target: daysFromNow(14),
+      site:'LC-1B, Mahia, NZ', status:'go'
+    },
+    {
+      agency:'ESA · Arianespace', name:'Ariane 6 · Eutelsat HOTBIRD-19',
+      payload:'High-throughput Ku-band broadcast satellite',
+      target: daysFromNow(18),
+      site:'ELA-4, Kourou, French Guiana', status:'tbd'
+    },
+    {
+      agency:'CNSA', name:'Long March 5B · CSS Expansion Module',
+      payload:'Chinese Space Station third science module',
+      target: daysFromNow(22),
+      site:'Wenchang Space Launch Center', status:'hold'
+    }
+  ];
+  const grid = document.getElementById('launchGrid');
+  const intervals = [];
+  LAUNCHES.slice(0, 3).forEach((lc, i) => {
+    const card = document.createElement('div');
+    card.className = 'launch-card';
+    card.innerHTML = `
+      <div class="lc-agency">${lc.agency}</div>
+      <div class="lc-name">${lc.name}</div>
+      <div class="lc-payload">${lc.payload}</div>
+      <div class="lc-countdown" id="lcd${i}">
+        <div class="lc-unit"><span class="lc-num" id="lc-d${i}">--</span><span class="lc-lbl">Days</span></div>
+        <div class="lc-unit"><span class="lc-num" id="lc-h${i}">--</span><span class="lc-lbl">Hrs</span></div>
+        <div class="lc-unit"><span class="lc-num" id="lc-m${i}">--</span><span class="lc-lbl">Min</span></div>
+        <div class="lc-unit"><span class="lc-num" id="lc-s${i}">--</span><span class="lc-lbl">Sec</span></div>
+      </div>
+      <div class="lc-foot">
+        <span class="lc-site">🚀 ${lc.site}</span>
+        <span class="lc-status ${lc.status}">${lc.status.toUpperCase()}</span>
+      </div>`;
+    grid.appendChild(card);
+    function tick() {
+      const diff = lc.target - new Date();
+      if (diff <= 0) {
+        document.getElementById('lc-d'+i).textContent = '00';
+        document.getElementById('lc-h'+i).textContent = '00';
+        document.getElementById('lc-m'+i).textContent = '00';
+        document.getElementById('lc-s'+i).textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hrs  = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+      document.getElementById('lc-d'+i).textContent = String(days).padStart(2,'0');
+      document.getElementById('lc-h'+i).textContent = String(hrs).padStart(2,'0');
+      document.getElementById('lc-m'+i).textContent = String(mins).padStart(2,'0');
+      document.getElementById('lc-s'+i).textContent = String(secs).padStart(2,'0');
+    }
+    tick();
+    intervals.push(setInterval(tick, 1000));
+  });
+})();
+
+/* ══════════════════════════════════════════
+   SPACE EVENTS CALENDAR
+══════════════════════════════════════════ */
+(function() {
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date();
+  let curYear = today.getFullYear();
+  let curMonth = today.getMonth();
+
+  const SPACE_EVENTS = [
+    // Month-relative events (month 0-indexed)
+    {month:5, day:11, name:'Perseid Meteor Shower Peak', type:'Meteor Shower', color:'gold', tag:'Astronomical Event',
+     desc:'The Perseids are one of the best annual meteor showers, producing up to 100 meteors per hour at peak. Best observed after midnight from a dark site.',
+     meta:[{k:'Peak Rate',v:'~100 meteors/hr'},{k:'Radiant',v:'Perseus constellation'},{k:'Parent Body',v:'Comet Swift-Tuttle'}]},
+    {month:5, day:16, name:'Strawberry Moon — Full Moon', type:'Lunar Event', color:'navy', tag:'Lunar',
+     desc:'June\'s full moon, traditionally called the Strawberry Moon by Native American tribes, marks the ripening of wild strawberries.',
+     meta:[{k:'Rise Time',v:'Sunset'},{k:'Illumination',v:'100%'},{k:'Distance',v:'~384,400 km'}]},
+    {month:5, day:21, name:'June Solstice', type:'Solar Event', color:'red', tag:'Solar Event',
+     desc:'The June solstice marks the longest day of the year in the Northern Hemisphere and the official start of summer. The Sun reaches its northernmost point.',
+     meta:[{k:'Type',v:'Summer Solstice (NH)'},{k:'Duration',v:'~16 hrs 38 min (at 45°N)'},{k:'Occurs At',v:'10:42 UTC'}]},
+    {month:5, day:25, name:'ISS Visible Pass — Prime Window', type:'Satellite Pass', color:'navy', tag:'ISS Pass',
+     desc:'The International Space Station will make a spectacular 6-minute pass across the sky reaching magnitude -3.8. Visible to the naked eye as a bright moving star.',
+     meta:[{k:'Max Magnitude',v:'-3.8'},{k:'Duration',v:'6 min 12 sec'},{k:'Max Elevation',v:'72°'}]},
+    {month:6, day:4, name:'Delta Aquariid Meteor Shower', type:'Meteor Shower', color:'gold', tag:'Astronomical Event',
+     desc:'The Southern Delta Aquariids produce a steady stream of meteors throughout late July, best seen from tropical and southern latitudes.',
+     meta:[{k:'Peak Rate',v:'~20 meteors/hr'},{k:'Radiant',v:'Aquarius constellation'},{k:'Best Viewing',v:'Late July'}]},
+    {month:6, day:12, name:'Buck Moon — Full Moon', type:'Lunar Event', color:'navy', tag:'Lunar',
+     desc:'July\'s full moon, named after the time when young bucks begin to grow their velvety antlers. This month\'s full moon occurs near perigee.',
+     meta:[{k:'Rise Time',v:'Sunset'},{k:'Illumination',v:'100%'},{k:'Type',v:'Near Supermoon'}]},
+    {month:6, day:20, name:'Starlink Block 11 Deployment', type:'Mission Event', color:'red', tag:'Launch',
+     desc:'SpaceX Starlink Group 11-14 satellites reach their operational altitude and begin inclination manoeuvres for final orbital insertion.',
+     meta:[{k:'Altitude',v:'550 km'},{k:'Inclination',v:'53°'},{k:'Satellites',v:'60 units'}]},
+    {month:6, day:28, name:'Saturn at Opposition', type:'Planetary Event', color:'gold', tag:'Planetary',
+     desc:'Saturn reaches opposition, rising at sunset and visible all night. The ringed planet will be at its closest and brightest for 2026 — rings near maximum tilt.',
+     meta:[{k:'Magnitude',v:'+0.5'},{k:'Distance',v:'9.02 AU'},{k:'Ring Tilt',v:'26.8°'}]},
+    {month:7, day:12, name:'Perseid Meteor Shower Peak', type:'Meteor Shower', color:'gold', tag:'Astronomical Event',
+     desc:'The annual Perseid shower reaches its peak — the most spectacular and widely observed meteor shower of the year.',
+     meta:[{k:'Peak Rate',v:'~100 meteors/hr'},{k:'Radiant',v:'Perseus constellation'},{k:'Moon Phase',v:'Crescent (favourable)'}]},
+    {month:7, day:19, name:'Sturgeon Moon — Full Moon', type:'Lunar Event', color:'navy', tag:'Lunar',
+     desc:'August\'s full moon, named after the large freshwater fish once abundant in North American lakes.',
+     meta:[{k:'Rise Time',v:'Sunset'},{k:'Illumination',v:'100%'},{k:'Distance',v:'~385,000 km'}]},
+  ];
+
+  function getEventsForMonth(year, month) {
+    return SPACE_EVENTS.filter(e => e.month === month);
+  }
+
+  function renderCalendar() {
+    document.getElementById('calMonthName').textContent = MONTHS[curMonth] + ' ' + curYear;
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    DAYS.forEach(d => {
+      const hd = document.createElement('div');
+      hd.className = 'cal-day-hd';
+      hd.textContent = d;
+      grid.appendChild(hd);
+    });
+    const firstDay = new Date(curYear, curMonth, 1).getDay();
+    const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+    const daysInPrev = new Date(curYear, curMonth, 0).getDate();
+    const events = getEventsForMonth(curYear, curMonth);
+    const eventsByDay = {};
+    events.forEach(e => { eventsByDay[e.day] = e; });
+
+    // Prev month filler
+    for (let i = firstDay - 1; i >= 0; i--) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell other-month';
+      const dn = document.createElement('span');
+      dn.className = 'cal-date';
+      dn.textContent = daysInPrev - i;
+      cell.appendChild(dn);
+      grid.appendChild(cell);
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      const isToday = d === today.getDate() && curMonth === today.getMonth() && curYear === today.getFullYear();
+      if (isToday) cell.classList.add('today');
+      const dn = document.createElement('span');
+      dn.className = 'cal-date';
+      dn.textContent = d;
+      cell.appendChild(dn);
+      if (eventsByDay[d]) {
+        const ev = eventsByDay[d];
+        cell.classList.add('has-event');
+        const dot = document.createElement('div');
+        dot.className = 'cal-dot ' + ev.color;
+        cell.appendChild(dot);
+        cell.addEventListener('click', () => openCalModal(ev, d));
+      }
+      grid.appendChild(cell);
+    }
+    // Fill remaining
+    const total = firstDay + daysInMonth;
+    const remaining = (7 - (total % 7)) % 7;
+    for (let d = 1; d <= remaining; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell other-month';
+      const dn = document.createElement('span');
+      dn.className = 'cal-date';
+      dn.textContent = d;
+      cell.appendChild(dn);
+      grid.appendChild(cell);
+    }
+    renderEventsList(events);
+  }
+
+  function renderEventsList(events) {
+    const list = document.getElementById('calEventsList');
+    list.innerHTML = '';
+    if (!events.length) {
+      const msg = document.createElement('div');
+      msg.style.cssText = 'font-family:var(--f-mono);font-size:.58rem;color:var(--dim2);padding:1rem 0';
+      msg.textContent = 'No events logged this month.';
+      list.appendChild(msg);
+      return;
+    }
+    /* Use createElement + addEventListener instead of JSON.stringify inside
+       onclick="..." attributes — JSON uses double-quotes which would break the
+       HTML attribute value and produce malformed DOM elements. */
+    events.forEach(e => {
+      const item = document.createElement('div');
+      item.className = 'cal-event-item';
+      item.innerHTML = `
+        <div class="cev-date">${MONTHS[curMonth]} ${e.day}</div>
+        <div class="cev-name">${e.name}</div>
+        <div class="cev-type">${e.type}</div>`;
+      item.addEventListener('click', () => openCalModal(e, e.day));
+      list.appendChild(item);
+    });
+  }
+
+  window.openCalModal = function(ev, day) {
+    document.getElementById('calModalTag').textContent = ev.tag;
+    document.getElementById('calModalDate').textContent = MONTHS[curMonth] + ' ' + day + ', ' + curYear;
+    document.getElementById('calModalName').textContent = ev.name;
+    document.getElementById('calModalDesc').textContent = ev.desc;
+    document.getElementById('calModalMeta').innerHTML = (ev.meta||[]).map(m =>
+      `<div class="cal-modal-meta-item"><strong>${m.k}</strong>${m.v}</div>`).join('');
+    document.getElementById('calModal').classList.add('open');
+  };
+  window.closeCalModal = function() {
+    document.getElementById('calModal').classList.remove('open');
+  };
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    curMonth--; if (curMonth < 0) { curMonth = 11; curYear--; } renderCalendar();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    curMonth++; if (curMonth > 11) { curMonth = 0; curYear++; } renderCalendar();
+  });
+
+  renderCalendar();
+})();
+
+/* ══════════════════════════════════════════
+   TOAST NOTIFICATION SYSTEM
+══════════════════════════════════════════ */
+(function() {
+  if (sessionStorage.getItem('eh_toasts_shown')) return;
+  sessionStorage.setItem('eh_toasts_shown', '1');
+
+  const TOAST_ARTICLES = [
+    {id:'a008', delay:3000,
+     label:'Just Published',
+     headline:'First Light From Before the First Stars: JWST Detects Population III Candidates',
+     img:'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=200&q=70'},
+    {id:'a003', delay:10000,
+     label:'Trending Now',
+     headline:'Hubble Tension Deepens — Standard Physics May Need Rewriting',
+     img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200&q=70'},
+    {id:'a009', delay:20000,
+     label:'Editor\'s Pick',
+     headline:'Voyager 1 Resumes Full Science Operations After 5-Month Hiccup',
+     img:'https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=200&q=70'},
+  ];
+
+  function showToast(t) {
+    const stack = document.getElementById('toastStack');
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.innerHTML = `
+      <div class="toast-inner">
+        <div class="toast-img"><img src="${t.img}" alt="" loading="lazy"></div>
+        <div class="toast-content">
+          <div class="toast-label">${t.label}</div>
+          <div class="toast-headline">${t.headline}</div>
+          <div class="toast-actions">
+            <button class="toast-read" onclick="dismissToast(this.closest('.toast'));openArticle('${t.id}')">Read Now →</button>
+            <button class="toast-close-btn" onclick="dismissToast(this.closest('.toast'))">✕</button>
+          </div>
+        </div>
+      </div>
+      <div class="toast-progress"></div>`;
+    stack.appendChild(el);
+    // Auto-dismiss after 6s
+    const timer = setTimeout(() => dismissToast(el), 6000);
+    el._timer = timer;
+  }
+
+  window.dismissToast = function(el) {
+    if (!el || el._removing) return;
+    el._removing = true;
+    clearTimeout(el._timer);
+    el.classList.add('removing');
+    el.addEventListener('animationend', () => el.remove(), {once:true});
+  };
+
+  TOAST_ARTICLES.forEach(t => setTimeout(() => showToast(t), t.delay));
+})();
+
 </script>
 
 <!-- ARTICLE READER PAGE -->
@@ -1216,5 +1857,9 @@ window.addEventListener('load', function() {
     </div>
   </div>
 </div>
+
+<!-- TOAST NOTIFICATION STACK -->
+<div class="toast-stack" id="toastStack"></div>
+
 </body>
 </html>
